@@ -46,6 +46,28 @@ npm start
 npm run dev
 ```
 
+## ✉️ Sistema de Tickets
+
+O NexoTicket automatiza a criação de canais de suporte privados, garantindo que apenas o usuário e a equipe autorizada tenham acesso.
+
+### Funcionamento
+1. O usuário clica em um botão em qualquer painel configurado.
+2. O bot verifica se o usuário já possui um ticket aberto (limite de 1 por vez).
+3. Um canal é criado dentro da categoria definida, com permissões exclusivas.
+4. Uma mensagem de boas-vindas é enviada com botões de controle (Fechar, Assumir, Deletar).
+
+### Configuração da Equipe (Staff)
+Administradores podem configurar quais cargos podem visualizar e responder aos tickets:
+- `/config staff add @Cargo`: Adiciona um cargo à equipe.
+- `/config staff remove @Cargo`: Remove um cargo da equipe.
+- `/config staff list`: Lista todos os cargos configurados.
+
+### Estrutura do Banco de Dados (Tickets & Config)
+
+- **`tickets`**: Armazena o estado de cada ticket (aberto/fechado), quem o criou e quem o assumiu.
+- **`guild_config`**: Mantém as configurações do servidor e o contador sequencial de tickets.
+- **`staff_roles`**: Lista de IDs de cargos permitidos por servidor.
+
 ## 🎫 Sistema de Painéis
 
 O sistema de painéis permite que administradores criem embeds interativos com botões para a abertura de tickets.
