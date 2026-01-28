@@ -118,8 +118,8 @@ const handleTicketButton = async (interaction) => {
 
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder().setCustomId(`ticket_claim_${ticketChannel.id}`).setLabel('Assumir').setStyle(ButtonStyle.Success).setEmoji('🙋‍♂️'),
-      new ButtonBuilder().setCustomId(`ticket_close_${ticketChannel.id}`).setLabel('Fechar').setStyle(ButtonStyle.Secondary).setEmoji('🔒'),
-      new ButtonBuilder().setCustomId(`ticket_delete_${ticketChannel.id}`).setLabel('Deletar').setStyle(ButtonStyle.Danger).setEmoji('🗑️')
+      new ButtonBuilder().setCustomId(`ticket_transfer_menu_${ticketChannel.id}`).setLabel('Transferir').setStyle(ButtonStyle.Secondary).setEmoji('📤'),
+      new ButtonBuilder().setCustomId(`ticket_close_${ticketChannel.id}`).setLabel('Fechar').setStyle(ButtonStyle.Danger).setEmoji('🔒')
     );
 
     await ticketChannel.send({ 

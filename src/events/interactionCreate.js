@@ -18,10 +18,24 @@ module.exports = {
         await this.handleError(interaction);
       }
     } else if (interaction.isButton()) {
-      // Button handling will be delegated to a dedicated utility or event
-      // For now, let's keep it simple or call the specific handler
       const { handleTicketButton } = require('../utils/ticketCreateHandler');
-      await handleTicketButton(interaction);
+      const { handleTicketAction } = require('../utils/ticketActionsHandler');
+
+      if (interaction.customId.startsWith('open_ticket_')) {
+        await handleTicketButton(interaction);
+      } else if (interaction.customId.startsWith('ticket_')) {
+        await handleTicketAction(interaction);
+      }
+    } else if (interaction.isModalSubmit()) {
+      const { handleTicketAction } = require('../utils/ticketActionsHandler');
+      if (interaction.customId.startsWith('ticket_')) {
+        await handleTicketAction(interaction);
+      }
+    } else if (interaction.isStringSelectMenu()) {
+        const { handleTicketAction } = require('../utils/ticketActionsHandler');
+        if (interaction.customId.startsWith('ticket_')) {
+            await handleTicketAction(interaction);
+        }
     }
   },
 

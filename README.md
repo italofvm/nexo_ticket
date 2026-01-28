@@ -67,6 +67,25 @@ Administradores podem configurar quais cargos podem visualizar e responder aos t
 - **`tickets`**: Armazena o estado de cada ticket (aberto/fechado), quem o criou e quem o assumiu.
 - **`guild_config`**: Mantém as configurações do servidor e o contador sequencial de tickets.
 - **`staff_roles`**: Lista de IDs de cargos permitidos por servidor.
+- **`transcripts`**: Armazena o conteúdo das mensagens dos tickets deletados.
+
+## 🛠️ Gerenciamento de Tickets
+
+Após a abertura, a equipe de suporte dispõe de ferramentas avançadas dentro do próprio canal:
+
+### Ações Disponíveis
+| Botão | Descrição |
+|-------|-----------|
+| ✋ **Assumir** | Vincula o ticket ao staff atual e renomeia o canal. |
+| 📤 **Transferir** | Abre um menu para passar o ticket para outro membro da staff. |
+| 🔒 **Fechar** | Bloqueia o acesso do usuário ao envio de mensagens e prepara para finalização. |
+| 🗑️ **Deletar** | Inicia o processo de deleção, exigindo confirmação e gerando transcrição. |
+
+### 📄 Sistema de Transcrições
+Sempre que um ticket é deletado, o NexoTicket realiza um backup completo:
+- **Formato:** HTML profissional estilizado.
+- **Conteúdo:** Mensagens, autores, avatares, timestamps e anexos.
+- **Entrega:** A transcrição é enviada por DM para o autor do ticket e para o staff que realizou a deleção, além de ser salva no banco de dados.
 
 ## 🎫 Sistema de Painéis
 
