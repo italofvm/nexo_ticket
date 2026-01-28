@@ -20,6 +20,9 @@ const {
   getTicketByChannel 
 } = require('../database/managementQueries');
 const { generateHTML } = require('./transcriptGenerator');
+const { logAction } = require('./logHandler');
+const { sendRatingRequest } = require('./ratingHandler');
+const { incMetric } = require('./metrics');
 const logger = require('./logger');
 
 /**
@@ -73,7 +76,6 @@ async function handleTransferMenu(interaction) {
 
     try {
         const members = await interaction.guild.members.fetch();
-        // Filter members who have at least one of the staff roles
         const staffMembers = members.filter(m => 
             !m.user.bot && (m.roles.cache.some(r => staffRoles.includes(r.id)) || m.permissions.has(PermissionFlagsBits.Administrator))
         );
@@ -101,7 +103,7 @@ async function handleTransferMenu(interaction) {
             ephemeral: true 
         });
     } catch (err) {
-        logger.error('Error in handleTransferMenu: %o', err);
+        logger.error('Error in handleTransferMenu: %s', err.message);
         await interaction.reply({ content: 'Erro ao buscar membros da equipe.', ephemeral: true });
     }
 }
@@ -135,6 +137,9 @@ async function handleClaim(interaction) {
 
     await interaction.editReply({ embeds: [embed] });
     
+    // Log Action
+    await logAction(interaction.guild, 'TICKET_CLAIM', interaction.user, { channel: interaction.channel });
+
     // Disable the claim button
     const originalMessage = interaction.message;
     const newRows = originalMessage.components.map(row => {
@@ -152,7 +157,8 @@ async function handleClaim(interaction) {
     await originalMessage.edit({ components: newRows });
     
   } catch (err) {
-    logger.error('Error in handleClaim: %o', err);
+    incMetric('errorsCount');
+    logger.error('Error in handleClaim: %s', err.message);
     await interaction.editReply('Erro ao assumir o ticket.');
   }
 }
@@ -164,7 +170,7 @@ async function handleClose(interaction) {
   const staffRoles = await getStaffRoles(interaction.guildId);
   const isStaff = interaction.member.roles.cache.some(r => staffRoles.includes(r.id)) || 
                   interaction.member.permissions.has(PermissionFlagsBits.Administrator) ||
-                  interaction.channel.name.includes(interaction.user.username); // Owner can close too
+                  interaction.channel.name.includes(interaction.user.username);
 
   if (!isStaff) {
     return interaction.reply({ content: 'Você não tem permissão para fechar este ticket.', ephemeral: true });
@@ -186,10 +192,15 @@ async function handleClose(interaction) {
     // Rename channel
     await interaction.channel.setName(`closed-${ticket.ticket_number}`);
 
+    const durationMs = Date.now() - new Date(ticket.created_at).getTime();
+    const durationMin = Math.floor(durationMs / 60000);
+    const durationStr = durationMin > 60 ? `${Math.floor(durationMin / 60)}h ${durationMin % 60}m` : `${durationMin}m`;
+
     const embed = new EmbedBuilder()
       .setTitle('Ticket Fechado')
       .setColor('#f1c40f')
       .setDescription(`🔒 Ticket fechado por ${interaction.user}.\n\nPara deletar permanentemente e gerar a transcrição, use o botão abaixo.`)
+      .addFields({ name: 'Duração', value: durationStr, inline: true })
       .setTimestamp();
 
     const row = new ActionRowBuilder().addComponents(
@@ -199,8 +210,23 @@ async function handleClose(interaction) {
 
     await interaction.editReply({ embeds: [embed], components: [row] });
 
+    incMetric('ticketsClosed');
+
+    // Send Rating Request
+    const creator = await interaction.guild.members.fetch(ticket.user_id).catch(() => null);
+    if (creator) {
+        await sendRatingRequest(creator.user, ticket, interaction.guild);
+    }
+
+    // Log Action
+    await logAction(interaction.guild, 'TICKET_CLOSE', interaction.user, { 
+        number: ticket.ticket_number, 
+        duration: durationStr 
+    });
+
   } catch (err) {
-    logger.error('Error in handleClose: %o', err);
+    incMetric('errorsCount');
+    logger.error('Error in handleClose: %s', err.message);
     await interaction.editReply('Erro ao fechar o ticket.');
   }
 }
@@ -241,7 +267,6 @@ async function handleDelete(interaction) {
     const ticket = await getTicketByChannel(interaction.channelId);
     const htmlContent = await generateHTML(interaction.channel);
     
-    // Save to DB
     await saveTranscript({
       ticketId: ticket ? ticket.id : null,
       channelId: interaction.channelId,
@@ -254,16 +279,16 @@ async function handleDelete(interaction) {
     const buffer = Buffer.from(htmlContent, 'utf-8');
     const attachment = new AttachmentBuilder(buffer, { name: `transcript-${interaction.channel.name}.html` });
     
-    // Send to the user who requested delete
+    // Send DM to Destroy-er
     await interaction.user.send({ 
         content: `Transcrição do ticket **${interaction.channel.name}** deletado em **${interaction.guild.name}**.`,
         files: [attachment] 
     }).catch(() => logger.warn('Could not send DM to staff who deleted the ticket.'));
 
-    // Send to ticket creator if different from destroyer
+    // Send DM to creator
     if (ticket && ticket.user_id !== interaction.user.id) {
         try {
-            const creator = await interaction.guild.members.fetch(ticket.user_id);
+            const creator = await interaction.guild.members.fetch(ticket.user_id).catch(() => null);
             if (creator) {
                 await creator.send({
                     content: `Seu ticket **#${ticket.ticket_number}** em **${interaction.guild.name}** foi finalizado e deletado. Aqui está a transcrição:`,
@@ -275,44 +300,54 @@ async function handleDelete(interaction) {
         }
     }
 
+    // Log Action
+    await logAction(interaction.guild, 'TICKET_DELETE', interaction.user, { 
+        number: ticket ? ticket.ticket_number : 'Unknown',
+        userId: ticket ? ticket.user_id : 'Unknown',
+        files: [attachment]
+    });
+
     await deleteTicketRecord(interaction.channelId);
 
     setTimeout(async () => {
       try {
         await interaction.channel.delete();
       } catch (e) {
-        logger.error('Failed to delete channel: %o', e);
+        logger.error('Failed to delete channel: %s', e.message);
       }
     }, 5000);
 
   } catch (err) {
-    logger.error('Error in handleDelete: %o', err);
+    incMetric('errorsCount');
+    logger.error('Error in handleDelete: %s', err.message);
     await interaction.followUp({ content: 'Erro ao deletar o ticket.', ephemeral: true });
   }
 }
 
 /**
- * Show Transfer Select Menu. (Triggered by another button or command)
- * Note: Adding a way to trigger this is needed. For now, let's implement the logic.
+ * Handle Staff Transferring a ticket.
  */
 async function handleTransfer(interaction) {
-    // This expects a Select Menu interaction
     const newStaffId = interaction.values[0];
     await interaction.deferUpdate();
 
     try {
         await transferTicket(interaction.channelId, newStaffId);
         
-        // Update permissions for new staff? 
-        // Staff roles already have access, but individual access might be needed if they are not in roles.
-        // Let's just notify.
         const embed = new EmbedBuilder()
             .setColor('#3498db')
             .setDescription(`📤 Ticket transferido para <@${newStaffId}>.`);
 
         await interaction.followUp({ embeds: [embed] });
+
+        // Log Action
+        await logAction(interaction.guild, 'TICKET_TRANSFER', interaction.user, { 
+            channel: interaction.channel,
+            newStaffId: newStaffId
+        });
     } catch (err) {
-        logger.error('Error in handleTransfer: %o', err);
+        incMetric('errorsCount');
+        logger.error('Error in handleTransfer: %s', err.message);
         await interaction.followUp({ content: 'Erro ao transferir o ticket.', ephemeral: true });
     }
 }

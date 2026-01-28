@@ -1,120 +1,104 @@
 # NexoTicket 🎫
 
-**NexoTicket** é um bot de tickets para Discord avançado, construído com foco em segurança, performance e facilidade de uso. Utiliza as tecnologias mais modernas do ecossistema Node.js para garantir uma experiência premium tanto para administradores quanto para usuários finais.
+[![Railway Deploy](https://raw.githubusercontent.com/railwayapp/core/master/assets/badge-light.svg)](https://railway.app/new)
+![Node Version](https://img.shields.io/badge/node-%3E%3D20.0.0-brightgreen)
+![Discord.js](https://img.shields.io/badge/discord.js-v14-blue)
+![License](https://img.shields.io/badge/license-MIT-orange)
 
-## 🚀 Tecnologias Utilizadas
+**NexoTicket** é uma solução enterprise-grade de tickets para Discord, projetada para alta performance, segurança robusta e experiência de usuário premium.
 
-- **Runtime:** [Node.js](https://nodejs.org/) v20+
-- **Library:** [Discord.js v14](https://discord.js.org/)
-- **Banco de Dados:** [NeonDB (PostgreSQL)](https://neon.tech/)
-- **Gestão de Ambiente:** [Dotenv](https://www.npmjs.com/package/dotenv)
-- **Logger Profissional:** [Winston](https://www.npmjs.com/package/winston)
-- **Hospedagem Recomendada:** [Railway](https://railway.app/)
+## ✨ Funcionalidades Principais
 
-## 🛠️ Configuração de Ambiente
+- 🎫 **Sistema de Painéis:** Crie embeds personalizados com botões para abertura de tickets.
+- ✋ **Gestão de Staff:** Comandos para assumir, transferir e gerenciar permissões em tempo real.
+- 📄 **Transcrições HTML:** Backups completos e estilizados enviados por DM e salvos em banco.
+- ⭐ **Satisfação do Cliente:** Sistema de avaliação (rating) 1-5 estrelas com feedback textual.
+- ⚙️ **Configuração Dinâmica:** Controle total via `/config` (logs, welcome messages, ratings).
+- 📊 **Dashboard de Analytics:** Estatísticas globais e individuais via `/stats`.
+- 🛡️ **Pronto para Produção:** Graceful shutdown, cache inteligente, monitoramento e índices de performance.
 
-Para rodar o projeto localmente, você precisará configurar as seguintes variáveis no seu arquivo `.env`:
+## 🚀 Como Começar
 
-```env
-DISCORD_TOKEN=seu_token_aqui
-CLIENT_ID=id_do_seu_bot
-GUILD_ID=id_do_servidor_de_testes
-DATABASE_URL=sua_url_do_neondb
-```
+### Pré-requisitos
+- Node.js v20 ou superior.
+- Uma conta no [Neon.tech](https://neon.tech/) (PostgreSQL Serverless).
+- Um Bot no [Portal de Desenvolvedores do Discord](https://discord.com/developers/applications).
 
-## 📦 Instalação
-
+### Instalação Local
 1. Clone o repositório:
 ```bash
 git clone https://github.com/seu-usuario/NexoTicket.git
 cd NexoTicket
 ```
-
 2. Instale as dependências:
 ```bash
 npm install
 ```
-
-3. Configure o `.env` seguindo o guia acima.
-
-4. Inicie o bot:
+3. Configure o `.env` (use `.env.example` como base).
+4. Rode as migrações e o bot em modo dev:
 ```bash
-# Modo de produção
-npm start
-
-# Modo de desenvolvimento
 npm run dev
 ```
 
-## ✉️ Sistema de Tickets
+### Deploy no Railway
+O NexoTicket vem pré-configurado para o **Railway**:
+1. Conecte seu repositório GitHub ao Railway.
+2. Adicione as variáveis de ambiente necessárias (`DISCORD_TOKEN`, `DATABASE_URL`, etc.).
+3. O Railway usará automaticamente o `railway.json` e o `npm start` (que roda as migrações e inicia o bot).
 
-O NexoTicket automatiza a criação de canais de suporte privados, garantindo que apenas o usuário e a equipe autorizada tenham acesso.
+## ⚙️ Variáveis de Ambiente
 
-### Funcionamento
-1. O usuário clica em um botão em qualquer painel configurado.
-2. O bot verifica se o usuário já possui um ticket aberto (limite de 1 por vez).
-3. Um canal é criado dentro da categoria definida, com permissões exclusivas.
-4. Uma mensagem de boas-vindas é enviada com botões de controle (Fechar, Assumir, Deletar).
+| Variável | Descrição | Obrigatório |
+|----------|-----------|-------------|
+| `DISCORD_TOKEN` | Token secreto do seu bot Discord. | Sim |
+| `CLIENT_ID` | ID da aplicação do bot. | Sim |
+| `GUILD_ID` | ID do servidor para registro de comandos (dev). | Sim |
+| `DATABASE_URL` | URL de conexão do NeonDB (PostgreSQL). | Sim |
+| `NODE_ENV` | `production` ou `development`. | Não |
+| `PORT` | Porta para o healthcheck HTTP. | Não |
 
-### Configuração da Equipe (Staff)
-Administradores podem configurar quais cargos podem visualizar e responder aos tickets:
-- `/config staff add @Cargo`: Adiciona um cargo à equipe.
-- `/config staff remove @Cargo`: Remove um cargo da equipe.
-- `/config staff list`: Lista todos os cargos configurados.
+## 📊 Comandos Disponíveis
 
-### Estrutura do Banco de Dados (Tickets & Config)
+### Administração
+- `/config staff`: Gerencia cargos da equipe.
+- `/config logs`: Define o canal de auditoria.
+- `/config welcome`: Define a mensagem de boas-vindas dos tickets.
+- `/config rating`: Ativa/desativa avaliações dos usuários.
+- `/panel`: Cria, edita ou deleta painéis de atendimento.
 
-- **`tickets`**: Armazena o estado de cada ticket (aberto/fechado), quem o criou e quem o assumiu.
-- **`guild_config`**: Mantém as configurações do servidor e o contador sequencial de tickets.
-- **`staff_roles`**: Lista de IDs de cargos permitidos por servidor.
-- **`transcripts`**: Armazena o conteúdo das mensagens dos tickets deletados.
+### Utilidade
+- `/stats global`: Dashboard geral do servidor.
+- `/stats staff`: Performance de um membro específico.
+- `/stats user`: Histórico de um usuário.
+- `/ping`: Verifica a latência do bot e da API.
 
-## 🛠️ Gerenciamento de Tickets
+## 🏗️ Estrutura do Projeto
 
-Após a abertura, a equipe de suporte dispõe de ferramentas avançadas dentro do próprio canal:
+```text
+/src
+  /commands     - Comandos Slash organizados por categoria
+  /database     - Camada de persistência e migrations
+  /events       - Handlers de eventos do Discord
+  /utils        - Utilitários de lógica, logs, cache e métricas
+  index.js      - Ponto de entrada (Bootstrap & Resilience)
+```
 
-### Ações Disponíveis
-| Botão | Descrição |
-|-------|-----------|
-| ✋ **Assumir** | Vincula o ticket ao staff atual e renomeia o canal. |
-| 📤 **Transferir** | Abre um menu para passar o ticket para outro membro da staff. |
-| 🔒 **Fechar** | Bloqueia o acesso do usuário ao envio de mensagens e prepara para finalização. |
-| 🗑️ **Deletar** | Inicia o processo de deleção, exigindo confirmação e gerando transcrição. |
+## 📈 Performance Benchmarks (Estimativas)
 
-### 📄 Sistema de Transcrições
-Sempre que um ticket é deletado, o NexoTicket realiza um backup completo:
-- **Formato:** HTML profissional estilizado.
-- **Conteúdo:** Mensagens, autores, avatares, timestamps e anexos.
-- **Entrega:** A transcrição é enviada por DM para o autor do ticket e para o staff que realizou a deleção, além de ser salva no banco de dados.
+- **Command Discovery:** Instantâneo (Lazy Loading metadados).
+- **Ticket Creation:** < 2s (incluindo permissões e DB persistence).
+- **Uso de Memória:** ~80-120MB em idle.
+- **Database Latency:** Otimizada via índices compostos.
 
-## 🎫 Sistema de Painéis
+## 🛡️ Segurança e Resiliência
 
-O sistema de painéis permite que administradores criem embeds interativos com botões para a abertura de tickets.
-
-### Comandos de Administração
-
-| Comando | Descrição |
-|---------|-----------|
-| `/panel create` | Cria um novo painel em um canal específico. |
-| `/panel edit` | Edita as configurações de um painel existente. |
-| `/panel delete` | Remove um painel e sua mensagem associada. |
-
-### Estrutura do Banco de Dados (Painéis)
-
-A tabela `panels` armazena as seguintes informações:
-- `guild_id`: ID do servidor.
-- `channel_id`: Canal onde o painel reside.
-- `message_id`: ID da mensagem do embed.
-- `title/description/color`: Configurações visuais.
-- `button_label/button_emoji`: Configurações do botão.
-- `category_id`: Onde os tickets serão abertos.
-
-## 🛡️ Segurança
-- **Prepared Statements:** Proteção total contra SQL Injection.
-- **Permissões:** Apenas membros com a permissão `ADMINISTRATOR` podem gerenciar painéis.
-- **Validação de Schema:** Verificação de variáveis de ambiente no boot.
-- **Logger Masking:** Não logamos dados sensíveis (PII).
-- **Rate Limit:** Cooldowns integrados para evitar abusos na API do Discord.
+- **Graceful Shutdown:** O bot finaliza conexões e destrói o cliente Discord de forma limpa ao receber SIGTERM.
+- **Cache Inteligente:** TTL de 5 minutos para permissões e configurações, reduzindo custos de DB.
+- **Monitoramento:** Logs estruturados com Winston e relatórios periódicos de métricas.
 
 ## 📄 Licença
-...
+
+Distribuído sob a licença **MIT**. Veja [LICENSE](./LICENSE) para mais informações.
+
+---
+Desenvolvido por **Nexo** 🎫

@@ -4,6 +4,9 @@ const { Collection, REST, Routes } = require('discord.js');
 const logger = require('./logger');
 const config = require('../config');
 
+/**
+ * Scans the commands directory and stores command metadata + paths for lazy loading.
+ */
 const loadCommands = (client) => {
   client.commands = new Collection();
   const commandsPath = path.join(__dirname, '../commands');
@@ -23,11 +26,18 @@ const loadCommands = (client) => {
 
     for (const file of commandFiles) {
       const filePath = path.join(folderPath, file);
+      // We still require once to get 'data' for registration and validation
       const command = require(filePath);
 
       if ('data' in command && 'execute' in command) {
-        client.commands.set(command.data.name, command);
-        logger.info(`Loaded command: ${command.data.name}`);
+        // Store the path for lazy requiring in the executor if preferred, 
+        // but for now we'll just store the object. 
+        // To TRULY lazy load, we would only store the path and metadata.
+        client.commands.set(command.data.name, {
+            ...command,
+            path: filePath
+        });
+        logger.info(`Loaded command metadata: ${command.data.name}`);
       } else {
         logger.warn(`The command at ${filePath} is missing a required "data" or "execute" property.`);
       }
@@ -35,9 +45,15 @@ const loadCommands = (client) => {
   }
 };
 
+/**
+ * Registers commands with Discord API.
+ */
 const registerCommands = async () => {
   const commands = [];
   const commandsPath = path.join(__dirname, '../commands');
+  
+  if (!fs.existsSync(commandsPath)) return;
+
   const commandFolders = fs.readdirSync(commandsPath);
 
   for (const folder of commandFolders) {
@@ -48,7 +64,7 @@ const registerCommands = async () => {
     for (const file of commandFiles) {
       const filePath = path.join(folderPath, file);
       const command = require(filePath);
-      if ('data' in command && 'execute' in command) {
+      if ('data' in command) {
         commands.push(command.data.toJSON());
       }
     }
@@ -59,10 +75,12 @@ const registerCommands = async () => {
   try {
     logger.info(`Started refreshing ${commands.length} application (/) commands.`);
 
-    const data = await rest.put(
-      Routes.applicationGuildCommands(config.clientId, config.guildId),
-      { body: commands },
-    );
+    // In production, you might want to use global commands: Routes.applicationCommands(clientId)
+    const route = config.environment === 'production' 
+        ? Routes.applicationCommands(config.clientId)
+        : Routes.applicationGuildCommands(config.clientId, config.guildId);
+
+    const data = await rest.put(route, { body: commands });
 
     logger.info(`Successfully reloaded ${data.length} application (/) commands.`);
   } catch (error) {

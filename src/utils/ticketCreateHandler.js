@@ -8,6 +8,9 @@ const {
 } = require('discord.js');
 const { getPanelByChannel } = require('../database/panelQueries');
 const { hasOpenTicket, createTicket, getStaffRoles } = require('../database/ticketQueries');
+const { getGuildConfig } = require('../database/repositories/configRepository');
+const { logAction } = require('../utils/logHandler');
+const { incMetric } = require('./metrics');
 const logger = require('./logger');
 
 const cooldowns = new Map();
@@ -15,13 +18,12 @@ const cooldowns = new Map();
 const handleTicketButton = async (interaction) => {
   if (!interaction.customId.startsWith('open_ticket_')) return;
 
-  const channelId = interaction.customId.replace('open_ticket_', '');
+  const panelChannelId = interaction.customId.replace('open_ticket_', '');
   const guild = interaction.guild;
   const user = interaction.user;
 
   await interaction.deferReply({ ephemeral: true });
 
-  // 1. Rate Limiting (30s)
   const lastUsed = cooldowns.get(user.id);
   if (lastUsed && Date.now() - lastUsed < 30000) {
     return interaction.editReply('Por favor, aguarde alguns segundos antes de abrir outro ticket.');
@@ -29,19 +31,16 @@ const handleTicketButton = async (interaction) => {
   cooldowns.set(user.id, Date.now());
 
   try {
-    // 2. Database Checks
-    const panel = await getPanelByChannel(channelId);
-    if (!panel) {
-      return interaction.editReply('Configuração do painel não encontrada.');
-    }
+    const panel = await getPanelByChannel(panelChannelId);
+    if (!panel) return interaction.editReply('Configuração do painel não encontrada.');
 
     const alreadyOpen = await hasOpenTicket(user.id, guild.id);
-    if (alreadyOpen) {
-      return interaction.editReply('Você já possui um ticket aberto neste servidor.');
-    }
+    if (alreadyOpen) return interaction.editReply('Você já possui um ticket aberto neste servidor.');
 
-    // 3. Category Validation
-    const category = guild.channels.cache.get(panel.category_id);
+    const config = await getGuildConfig(guild.id);
+
+    const categoryId = panel.category_id;
+    const category = guild.channels.cache.get(categoryId);
     if (!category || category.type !== ChannelType.GuildCategory) {
       return interaction.editReply('A categoria de tickets não existe ou é inválida.');
     }
@@ -50,49 +49,22 @@ const handleTicketButton = async (interaction) => {
       return interaction.editReply('A categoria de tickets está cheia. Por favor, contate um administrador.');
     }
 
-    // 4. Permission Check (Bot)
     if (!guild.members.me.permissions.has(PermissionFlagsBits.ManageChannels)) {
       return interaction.editReply('O bot não tem permissão para criar canais (`MANAGE_CHANNELS`).');
     }
 
-    // 5. Get Staff Roles
     const staffRoleIds = await getStaffRoles(guild.id);
     
-    // 6. Define Permissions
     const permissionOverwrites = [
-      {
-        id: guild.id,
-        deny: [PermissionFlagsBits.ViewChannel],
-      },
-      {
-        id: user.id,
-        allow: [
-          PermissionFlagsBits.ViewChannel,
-          PermissionFlagsBits.SendMessages,
-          PermissionFlagsBits.ReadMessageHistory,
-          PermissionFlagsBits.AttachFiles,
-        ],
-      },
-      {
-        id: guild.members.me.id,
-        allow: [
-          PermissionFlagsBits.ViewChannel,
-          PermissionFlagsBits.SendMessages,
-          PermissionFlagsBits.ManageChannels,
-          PermissionFlagsBits.ManageMessages,
-        ],
-      }
+      { id: guild.id, deny: [PermissionFlagsBits.ViewChannel] },
+      { id: user.id, allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages, PermissionFlagsBits.ReadMessageHistory, PermissionFlagsBits.AttachFiles] },
+      { id: guild.members.me.id, allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages, PermissionFlagsBits.ManageChannels, PermissionFlagsBits.ManageMessages] }
     ];
 
-    // Add Staff Roles to permissions
     staffRoleIds.forEach(roleId => {
-      permissionOverwrites.push({
-        id: roleId,
-        allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages],
-      });
+      permissionOverwrites.push({ id: roleId, allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages] });
     });
 
-    // 7. Create Channel
     const ticketChannel = await guild.channels.create({
       name: `ticket-${user.username.substring(0, 15)}`,
       type: ChannelType.GuildText,
@@ -100,8 +72,7 @@ const handleTicketButton = async (interaction) => {
       permissionOverwrites: permissionOverwrites,
     });
 
-    // 8. Save Ticket to DB
-    await createTicket({
+    const ticket = await createTicket({
       guildId: guild.id,
       channelId: ticketChannel.id,
       userId: user.id,
@@ -109,10 +80,13 @@ const handleTicketButton = async (interaction) => {
       categoryId: category.id
     });
 
-    // 9. Send Initial Message
+    let welcomeMsg = config.welcome_message 
+        ? config.welcome_message.replace('{user}', `${user}`)
+        : `Olá ${user}, nossa equipe foi notificada e em breve você será atendido.\nPor favor, descreva o seu problema antecipadamente.`;
+
     const embed = new EmbedBuilder()
       .setTitle('Boas-vindas ao seu Ticket')
-      .setDescription(`Olá ${user}, nossa equipe foi notificada e em breve você será atendido.\nPor favor, descreva o seu problema antecipadamente.`)
+      .setDescription(welcomeMsg)
       .setColor(panel.color || '#0099ff')
       .setTimestamp();
 
@@ -128,11 +102,15 @@ const handleTicketButton = async (interaction) => {
       components: [row] 
     });
 
+    incMetric('ticketsOpened');
+    await logAction(guild, 'TICKET_CREATE', user, { channel: ticketChannel, id: ticket.id });
+
     logger.info(`Ticket channel ${ticketChannel.id} created for user ${user.id}`);
     return interaction.editReply(`Ticket criado com sucesso em ${ticketChannel}!`);
 
   } catch (err) {
-    logger.error('Error creating ticket: %o', err);
+    incMetric('errorsCount');
+    logger.error('Error creating ticket: %s', err.message);
     return interaction.editReply('Ocorreu um erro ao tentar criar o seu ticket.');
   }
 };

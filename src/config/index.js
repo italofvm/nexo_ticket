@@ -8,11 +8,21 @@ const requiredEnvs = [
   'DATABASE_URL'
 ];
 
+/**
+ * Validates that all required environment variables are present.
+ */
 const validateConfig = () => {
   const missing = requiredEnvs.filter(env => !process.env[env]);
 
   if (missing.length > 0) {
-    logger.error('Missing mandatory environment variables: %s', missing.join(', '));
+    logger.error('CRITICAL ERROR: Missing mandatory environment variables: %s', missing.join(', '));
+    logger.error('Please check your .env file or Railway environment settings.');
+    process.exit(1);
+  }
+
+  // Basic validation for CLIENT_ID and GUILD_ID (should be numbers/snowflakes string)
+  if (!/^\d{17,20}$/.test(process.env.CLIENT_ID)) {
+    logger.error('Invalid CLIENT_ID format.');
     process.exit(1);
   }
 
@@ -24,5 +34,7 @@ module.exports = {
   clientId: process.env.CLIENT_ID,
   guildId: process.env.GUILD_ID,
   databaseUrl: process.env.DATABASE_URL,
+  port: process.env.PORT || null,
+  environment: process.env.NODE_ENV || 'development',
   validateConfig
 };

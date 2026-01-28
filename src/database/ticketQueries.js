@@ -1,5 +1,6 @@
 const { sql } = require('./index');
 const logger = require('../utils/logger');
+const { getCache, setCache, invalidateCache } = require('../utils/configCache');
 
 /**
  * Checks if a user has an open ticket in a guild.
@@ -13,14 +14,13 @@ const hasOpenTicket = async (userId, guildId) => {
     `;
     return results.length > 0;
   } catch (err) {
-    logger.error('Error in hasOpenTicket: %o', err);
+    logger.error('Error in hasOpenTicket: %s', err.message);
     throw err;
   }
 };
 
 /**
  * Increments and returns the next ticket number for a guild.
- * Uses a transaction-safe upsert.
  */
 const getNextTicketNumber = async (guildId) => {
   try {
@@ -33,7 +33,7 @@ const getNextTicketNumber = async (guildId) => {
     `;
     return results[0].ticket_count;
   } catch (err) {
-    logger.error('Error in getNextTicketNumber: %o', err);
+    logger.error('Error in getNextTicketNumber: %s', err.message);
     throw err;
   }
 };
@@ -49,26 +49,31 @@ const createTicket = async (data) => {
         guild_id, channel_id, user_id, panel_id, ticket_number, category_id
       ) VALUES (
         ${data.guildId}, ${data.channelId}, ${data.userId}, ${data.panelId}, ${ticketNumber}, ${data.categoryId}
-      ) RETURNING *;
+      ) RETURNING id, ticket_number;
     `;
     return results[0];
   } catch (err) {
-    logger.error('Error in createTicket: %o', err);
+    logger.error('Error in createTicket: %s', err.message);
     throw err;
   }
 };
 
 /**
- * Gets staff roles for a guild.
+ * Gets staff roles for a guild. Use cache.
  */
 const getStaffRoles = async (guildId) => {
+  const cached = getCache(guildId, 'staff');
+  if (cached) return cached;
+
   try {
     const results = await sql`
       SELECT role_id FROM staff_roles WHERE guild_id = ${guildId};
     `;
-    return results.map(r => r.role_id);
+    const roles = results.map(r => r.role_id);
+    setCache(guildId, 'staff', roles);
+    return roles;
   } catch (err) {
-    logger.error('Error in getStaffRoles: %o', err);
+    logger.error('Error in getStaffRoles: %s', err.message);
     throw err;
   }
 };
@@ -78,7 +83,6 @@ const getStaffRoles = async (guildId) => {
  */
 const addStaffRole = async (guildId, roleId) => {
   try {
-    // Ensure guild_config existence first due to FK
     await sql`INSERT INTO guild_config (guild_id) VALUES (${guildId}) ON CONFLICT DO NOTHING;`;
     
     await sql`
@@ -86,9 +90,10 @@ const addStaffRole = async (guildId, roleId) => {
       VALUES (${guildId}, ${roleId})
       ON CONFLICT DO NOTHING;
     `;
+    invalidateCache(guildId, 'staff');
     return true;
   } catch (err) {
-    logger.error('Error in addStaffRole: %o', err);
+    logger.error('Error in addStaffRole: %s', err.message);
     throw err;
   }
 };
@@ -101,9 +106,10 @@ const removeStaffRole = async (guildId, roleId) => {
     await sql`
       DELETE FROM staff_roles WHERE guild_id = ${guildId} AND role_id = ${roleId};
     `;
+    invalidateCache(guildId, 'staff');
     return true;
   } catch (err) {
-    logger.error('Error in removeStaffRole: %o', err);
+    logger.error('Error in removeStaffRole: %s', err.message);
     throw err;
   }
 };

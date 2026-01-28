@@ -1,5 +1,6 @@
 const { sql } = require('./index');
 const logger = require('../utils/logger');
+const { getCache, setCache, invalidateCache } = require('../utils/configCache');
 
 /**
  * Creates a new ticket panel.
@@ -11,26 +12,34 @@ const createPanel = async (guildId, data) => {
         guild_id, channel_id, message_id, title, description, color, button_label, button_emoji, category_id
       ) VALUES (
         ${guildId}, ${data.channelId}, ${data.messageId}, ${data.title}, ${data.description}, ${data.color}, ${data.buttonLabel}, ${data.buttonEmoji}, ${data.categoryId}
-      ) RETURNING *;
+      ) RETURNING id, message_id;
     `;
+    invalidateCache(guildId, 'panel');
     return results[0];
   } catch (err) {
-    logger.error('Error in createPanel: %o', err);
+    logger.error('Error in createPanel: %s', err.message);
     throw err;
   }
 };
 
 /**
- * Retrieves a panel by channel ID.
+ * Retrieves a panel by channel ID. Use cache.
  */
 const getPanelByChannel = async (channelId) => {
+  const cached = getCache(channelId, 'panel');
+  if (cached) return cached;
+
   try {
     const results = await sql`
-      SELECT * FROM panels WHERE channel_id = ${channelId} LIMIT 1;
+      SELECT id, guild_id, channel_id, message_id, title, description, color, button_label, button_emoji, category_id 
+      FROM panels WHERE channel_id = ${channelId} LIMIT 1;
     `;
+    if (results[0]) {
+        setCache(channelId, 'panel', results[0]);
+    }
     return results[0];
   } catch (err) {
-    logger.error('Error in getPanelByChannel: %o', err);
+    logger.error('Error in getPanelByChannel: %s', err.message);
     throw err;
   }
 };
@@ -50,11 +59,14 @@ const updatePanel = async (panelId, data) => {
         category_id = ${data.categoryId},
         updated_at = CURRENT_TIMESTAMP
       WHERE id = ${panelId}
-      RETURNING *;
+      RETURNING id, channel_id;
     `;
+    if (results[0]) {
+        invalidateCache(results[0].channel_id, 'panel');
+    }
     return results[0];
   } catch (err) {
-    logger.error('Error in updatePanel: %o', err);
+    logger.error('Error in updatePanel: %s', err.message);
     throw err;
   }
 };
@@ -64,10 +76,13 @@ const updatePanel = async (panelId, data) => {
  */
 const deletePanel = async (panelId) => {
   try {
-    await sql`DELETE FROM panels WHERE id = ${panelId};`;
+    const results = await sql`DELETE FROM panels WHERE id = ${panelId} RETURNING channel_id;`;
+    if (results[0]) {
+        invalidateCache(results[0].channel_id, 'panel');
+    }
     return true;
   } catch (err) {
-    logger.error('Error in deletePanel: %o', err);
+    logger.error('Error in deletePanel: %s', err.message);
     throw err;
   }
 };

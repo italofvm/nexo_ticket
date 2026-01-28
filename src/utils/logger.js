@@ -11,30 +11,36 @@ const logger = winston.createLogger({
   ),
   defaultMeta: { service: 'nexoticket' },
   transports: [
-    new winston.transports.File({ 
-      filename: path.join(__dirname, '../../logs/error.log'), 
-      level: 'error',
-      maxsize: 5242880, // 5MB
-      maxFiles: 5,
-    }),
-    new winston.transports.File({ 
-      filename: path.join(__dirname, '../../logs/combined.log'),
-      maxsize: 5242880, // 5MB
-      maxFiles: 5,
-    }),
+    // We always log to console in production for Railway/Docker logs
+    new winston.transports.Console({
+      format: winston.format.combine(
+        winston.format.colorize(),
+        winston.format.printf(({ level, message, timestamp, stack, ...meta }) => {
+          let log = `${timestamp} ${level}: ${stack || message}`;
+          if (Object.keys(meta).length > 1) { // 1 because service: nexoticket is default
+            log += ` ${JSON.stringify(meta)}`;
+          }
+          return log;
+        })
+      ),
+    })
   ],
 });
 
-if (process.env.NODE_ENV !== 'production') {
-  logger.add(new winston.transports.Console({
-    format: winston.format.combine(
-      winston.format.colorize(),
-      winston.format.simple(),
-      winston.format.printf(({ level, message, timestamp, stack }) => {
-        return `${timestamp} ${level}: ${stack || message}`;
-      })
-    ),
-  }));
+// File logging only if not in a containerized environment like Railway 
+// (though it doesn't hurt, but ephemeral storage in Railway wipes them)
+if (process.env.RAILWAY_ENVIRONMENT === undefined) {
+    logger.add(new winston.transports.File({ 
+      filename: path.join(__dirname, '../../logs/error.log'), 
+      level: 'error',
+      maxsize: 5242880, 
+      maxFiles: 5,
+    }));
+    logger.add(new winston.transports.File({ 
+      filename: path.join(__dirname, '../../logs/combined.log'),
+      maxsize: 5242880, 
+      maxFiles: 5,
+    }));
 }
 
 module.exports = logger;
