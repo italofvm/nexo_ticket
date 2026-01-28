@@ -46,14 +46,34 @@ npm start
 npm run dev
 ```
 
-## 🛡️ Segurança
+## 🎫 Sistema de Painéis
 
-Este projeto adota práticas rigorosas de segurança:
+O sistema de painéis permite que administradores criem embeds interativos com botões para a abertura de tickets.
+
+### Comandos de Administração
+
+| Comando | Descrição |
+|---------|-----------|
+| `/panel create` | Cria um novo painel em um canal específico. |
+| `/panel edit` | Edita as configurações de um painel existente. |
+| `/panel delete` | Remove um painel e sua mensagem associada. |
+
+### Estrutura do Banco de Dados (Painéis)
+
+A tabela `panels` armazena as seguintes informações:
+- `guild_id`: ID do servidor.
+- `channel_id`: Canal onde o painel reside.
+- `message_id`: ID da mensagem do embed.
+- `title/description/color`: Configurações visuais.
+- `button_label/button_emoji`: Configurações do botão.
+- `category_id`: Onde os tickets serão abertos.
+
+## 🛡️ Segurança
 - **Prepared Statements:** Proteção total contra SQL Injection.
+- **Permissões:** Apenas membros com a permissão `ADMINISTRATOR` podem gerenciar painéis.
 - **Validação de Schema:** Verificação de variáveis de ambiente no boot.
 - **Logger Masking:** Não logamos dados sensíveis (PII).
 - **Rate Limit:** Cooldowns integrados para evitar abusos na API do Discord.
 
 ## 📄 Licença
-
-Este projeto está licenciado sob a [MIT License](LICENSE).
+...
