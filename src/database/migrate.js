@@ -62,7 +62,12 @@ const migrations = [
   // Phase 5: Advanced (Expansion)
   `ALTER TABLE guild_config ADD COLUMN IF NOT EXISTS log_channel_id VARCHAR(20);`,
   `ALTER TABLE guild_config ADD COLUMN IF NOT EXISTS rating_enabled BOOLEAN DEFAULT TRUE;`,
+  `ALTER TABLE guild_config ADD COLUMN IF NOT EXISTS rating_channel_id VARCHAR(20);`,
   `ALTER TABLE guild_config ADD COLUMN IF NOT EXISTS welcome_message TEXT;`,
+  `ALTER TABLE guild_config ADD COLUMN IF NOT EXISTS visitor_role_id VARCHAR(20);`,
+  `ALTER TABLE guild_config ADD COLUMN IF NOT EXISTS client_role_id VARCHAR(20);`,
+  `ALTER TABLE guild_config ADD COLUMN IF NOT EXISTS active_client_role_id VARCHAR(20);`,
+
 
   `CREATE TABLE IF NOT EXISTS ratings (
     id SERIAL PRIMARY KEY,
@@ -97,7 +102,7 @@ async function runMigrations() {
   
   try {
     for (const migration of migrations) {
-      await sql.unsafe(migration);
+      await sql.query(migration);
     }
     logger.info('Migrations completed successfully.');
   } catch (err) {

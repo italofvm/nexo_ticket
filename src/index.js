@@ -10,6 +10,8 @@ const { loadEvents } = require('./utils/eventHandler');
 const { loadCommands, registerCommands } = require('./utils/commandHandler');
 const { query } = require('./database');
 
+let healthServer;
+
 // 2. Initialize Client
 const client = new Client({
   intents: [
@@ -46,6 +48,11 @@ const shutdown = async (signal) => {
             logger.info('Closing Discord client...');
             client.destroy();
         }
+
+        if (healthServer) {
+            logger.info('Closing healthcheck server...');
+            healthServer.close();
+        }
         
         logger.info('Clean exit.');
         clearTimeout(forceExit);
@@ -61,7 +68,7 @@ process.on('SIGTERM', () => shutdown('SIGTERM'));
 
 // 5. Optional Healthcheck Server (Railway/Uptime monitoring)
 if (config.port) {
-    http.createServer((req, res) => {
+    healthServer = http.createServer((req, res) => {
         if (req.url === '/health') {
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ status: 'ok', uptime: process.uptime() }));
@@ -82,6 +89,10 @@ async function bootstrap() {
     // Test Database Connection
     await query('SELECT NOW()');
     logger.info('Database connection established.');
+
+    // Run Migrations
+    const { runMigrations } = require('./database/migrate');
+    await runMigrations();
 
     // Load Handlers
     loadEvents(client);

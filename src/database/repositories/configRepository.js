@@ -11,7 +11,7 @@ const getGuildConfig = async (guildId) => {
 
   try {
     const results = await sql`
-      SELECT guild_id, ticket_count, log_channel_id, rating_enabled, welcome_message 
+      SELECT guild_id, ticket_count, log_channel_id, rating_enabled, rating_channel_id, welcome_message, visitor_role_id, client_role_id, active_client_role_id
       FROM guild_config WHERE guild_id = ${guildId} LIMIT 1;
     `;
     
@@ -19,7 +19,7 @@ const getGuildConfig = async (guildId) => {
     if (results.length === 0) {
       const newConfig = await sql`
         INSERT INTO guild_config (guild_id) VALUES (${guildId})
-        RETURNING guild_id, ticket_count, log_channel_id, rating_enabled, welcome_message;
+        RETURNING guild_id, ticket_count, log_channel_id, rating_enabled, rating_channel_id, welcome_message, visitor_role_id, client_role_id, active_client_role_id;
       `;
       setCache(guildId, 'config', newConfig[0]);
       return newConfig[0];
@@ -48,7 +48,7 @@ const updateGuildConfig = async (guildId, settings) => {
         return `${col} = $${index + 2}`;
     });
 
-    query += setClauses.join(', ') + ' WHERE guild_id = $1 RETURNING guild_id, ticket_count, log_channel_id, rating_enabled, welcome_message;';
+    query += setClauses.join(', ') + ' WHERE guild_id = $1 RETURNING guild_id, ticket_count, log_channel_id, rating_enabled, rating_channel_id, welcome_message, visitor_role_id, client_role_id, active_client_role_id;';
 
     const values = columns.map(col => settings[col]);
     

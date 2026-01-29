@@ -13,7 +13,7 @@ const query = async (queryText, params = []) => {
   try {
     // Note: @neondatabase/serverless neon() function handles parameters safely
     // to prevent SQL injection when used correctly.
-    const result = await sql(queryText, params);
+    const result = await sql.query(queryText, params);
     const duration = Date.now() - start;
     logger.info('Executed query in %dms', duration);
     return result;

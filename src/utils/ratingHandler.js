@@ -5,7 +5,8 @@ const {
   ActionRowBuilder,
   ModalBuilder,
   TextInputBuilder,
-  TextInputStyle
+  TextInputStyle,
+  MessageFlags
 } = require('discord.js');
 const { getGuildConfig } = require('../database/repositories/configRepository');
 const { sql } = require('../database/index');
@@ -75,7 +76,7 @@ const handleRatingSubmit = async (interaction) => {
   const [_, __, ticketId, rating] = interaction.customId.split('_');
   const feedback = interaction.fields.getTextInputValue('feedback_input') || '';
 
-  await interaction.deferReply({ ephemeral: true });
+  await interaction.deferReply({ flags: [MessageFlags.Ephemeral] });
 
   try {
     // Save to DB
@@ -86,6 +87,30 @@ const handleRatingSubmit = async (interaction) => {
 
     await interaction.editReply('Obrigado pela sua avaliação!');
     
+    // Send to ratings channel if configured
+    const config = await getGuildConfig(interaction.guildId);
+    if (config && config.rating_channel_id) {
+      const channel = await interaction.guild.channels.fetch(config.rating_channel_id).catch(() => null);
+      if (channel) {
+        const stars = '⭐'.repeat(parseInt(rating));
+        const ratingEmbed = new EmbedBuilder()
+          .setTitle('Nova Avaliação Recebida')
+          .setDescription(`O usuário **${interaction.user.tag}** avaliou o atendimento.`)
+          .addFields(
+            { name: 'Ticket', value: `#${ticketId}`, inline: true },
+            { name: 'Nota', value: `${stars} (${rating}/5)`, inline: true },
+            { name: 'Feedback', value: feedback || '*Nenhum feedback fornecido.*' }
+          )
+          .setColor(rating >= 4 ? '#2ecc71' : rating >= 3 ? '#f1c40f' : '#e74c3c')
+          .setTimestamp()
+          .setFooter({ text: `ID do Usuário: ${interaction.user.id}` });
+
+        await channel.send({ embeds: [ratingEmbed] }).catch(err => {
+          logger.error('Failed to send rating embed to channel: %o', err);
+        });
+      }
+    }
+
     // Update the message to remove buttons
     await interaction.message.edit({ components: [] }).catch(() => {});
     

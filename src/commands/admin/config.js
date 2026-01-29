@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionFlagsBits, ChannelType } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits, ChannelType, MessageFlags } = require('discord.js');
 const { addStaffRole, removeStaffRole, getStaffRoles } = require('../../database/ticketQueries');
 const { updateGuildConfig, getGuildConfig } = require('../../database/repositories/configRepository');
 const { logAction } = require('../../utils/logHandler');
@@ -45,6 +45,12 @@ module.exports = {
             .setDescription('Habilitar avaliações?')
             .setRequired(true)
         )
+        .addChannelOption(opt =>
+          opt.setName('channel')
+            .setDescription('Canal onde as avaliações serão enviadas')
+            .addChannelTypes(ChannelType.GuildText)
+            .setRequired(false)
+        )
     )
     .addSubcommand(sub =>
       sub.setName('welcome')
@@ -55,13 +61,32 @@ module.exports = {
             .setMaxLength(500)
             .setRequired(true)
         )
+    )
+    .addSubcommandGroup(group =>
+      group.setName('roles')
+        .setDescription('Gerencia os cargos automatizados')
+        .addSubcommand(sub =>
+          sub.setName('visitor')
+            .setDescription('Define o cargo de visitante (dado ao entrar)')
+            .addRoleOption(opt => opt.setName('role').setDescription('Cargo de visitante').setRequired(true))
+        )
+        .addSubcommand(sub =>
+          sub.setName('client')
+            .setDescription('Define o cargo de cliente (dado ao abrir ticket)')
+            .addRoleOption(opt => opt.setName('role').setDescription('Cargo de cliente').setRequired(true))
+        )
+        .addSubcommand(sub =>
+          sub.setName('active')
+            .setDescription('Define o cargo de cliente ativo (dado ao aceitar projeto)')
+            .addRoleOption(opt => opt.setName('role').setDescription('Cargo de cliente ativo').setRequired(true))
+        )
     ),
 
   async execute(interaction) {
     const group = interaction.options.getSubcommandGroup();
     const subcommand = interaction.options.getSubcommand();
 
-    await interaction.deferReply({ ephemeral: true });
+    await interaction.deferReply({ flags: [MessageFlags.Ephemeral] });
 
     try {
       // Group: Staff
@@ -101,9 +126,20 @@ module.exports = {
       // Subcommand: Rating
       if (subcommand === 'rating') {
         const enabled = interaction.options.getBoolean('enabled');
-        await updateGuildConfig(interaction.guildId, { rating_enabled: enabled });
-        await logAction(interaction.guild, 'CONFIG_UPDATE', interaction.user, { changes: `Ratings ${enabled ? 'Enabled' : 'Disabled'}` });
-        return interaction.editReply(`Sistema de avaliação ${enabled ? 'habilitado' : 'desabilitado'}.`);
+        const channel = interaction.options.getChannel('channel');
+        
+        const settings = { rating_enabled: enabled };
+        if (channel) settings.rating_channel_id = channel.id;
+
+        await updateGuildConfig(interaction.guildId, settings);
+        await logAction(interaction.guild, 'CONFIG_UPDATE', interaction.user, { 
+          changes: `Ratings ${enabled ? 'Enabled' : 'Disabled'}${channel ? `, Channel: ${channel.name}` : ''}` 
+        });
+        
+        let response = `Sistema de avaliação ${enabled ? 'habilitado' : 'desabilitado'}.`;
+        if (channel) response += ` Canal definido para ${channel}.`;
+        
+        return interaction.editReply(response);
       }
 
       // Subcommand: Welcome Message
@@ -112,6 +148,28 @@ module.exports = {
         await updateGuildConfig(interaction.guildId, { welcome_message: message });
         await logAction(interaction.guild, 'CONFIG_UPDATE', interaction.user, { changes: `Welcome message updated` });
         return interaction.editReply('Mensagem de boas-vindas atualizada com sucesso.');
+      }
+
+      // Group: Roles
+      if (group === 'roles') {
+        const role = interaction.options.getRole('role');
+        const settings = {};
+        let label = '';
+
+        if (subcommand === 'visitor') {
+          settings.visitor_role_id = role.id;
+          label = 'Visitante';
+        } else if (subcommand === 'client') {
+          settings.client_role_id = role.id;
+          label = 'Cliente';
+        } else if (subcommand === 'active') {
+          settings.active_client_role_id = role.id;
+          label = 'Cliente Ativo';
+        }
+
+        await updateGuildConfig(interaction.guildId, settings);
+        await logAction(interaction.guild, 'CONFIG_UPDATE', interaction.user, { changes: `Role Config Updated: ${label} -> ${role.name}` });
+        return interaction.editReply(`Cargo de **${label}** definido para ${role}.`);
       }
 
     } catch (err) {

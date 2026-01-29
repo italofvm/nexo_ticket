@@ -5,7 +5,8 @@ const {
   ButtonBuilder, 
   ButtonStyle, 
   ActionRowBuilder, 
-  ChannelType 
+  ChannelType,
+  MessageFlags 
 } = require('discord.js');
 const { createPanel, getPanelByChannel, updatePanel, deletePanel } = require('../../database/panelQueries');
 const logger = require('../../utils/logger');
@@ -47,7 +48,7 @@ module.exports = {
     const subcommand = interaction.options.getSubcommand();
     const channel = interaction.options.getChannel('channel');
 
-    await interaction.deferReply({ ephemeral: true });
+    await interaction.deferReply({ flags: [MessageFlags.Ephemeral] });
 
     try {
       if (subcommand === 'create') {

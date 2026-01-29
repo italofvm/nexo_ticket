@@ -8,7 +8,9 @@ const {
   TextInputBuilder,
   TextInputStyle,
   StringSelectMenuBuilder,
-  AttachmentBuilder
+  AttachmentBuilder,
+  MessageFlags,
+  ChannelType
 } = require('discord.js');
 const { getStaffRoles } = require('../database/ticketQueries');
 const { 
@@ -22,7 +24,9 @@ const {
 const { generateHTML } = require('./transcriptGenerator');
 const { logAction } = require('./logHandler');
 const { sendRatingRequest } = require('./ratingHandler');
+const { updateTicketStatus, TICKET_CATEGORIES } = require('./ticketStatusManager');
 const { incMetric } = require('./metrics');
+const { getGuildConfig } = require('../database/repositories/configRepository');
 const logger = require('./logger');
 
 /**
@@ -60,6 +64,11 @@ const handleTicketAction = async (interaction) => {
   if (customId.startsWith('ticket_transfer_select_')) {
     return await handleTransfer(interaction);
   }
+
+  // 7. Accept Ticket Action
+  if (customId.startsWith('ticket_accept_')) {
+    return await handleAccept(interaction);
+  }
 };
 
 /**
@@ -71,7 +80,7 @@ async function handleTransferMenu(interaction) {
                     interaction.member.permissions.has(PermissionFlagsBits.Administrator);
 
     if (!isStaff) {
-        return interaction.reply({ content: 'Apenas membros da equipe podem transferir tickets.', ephemeral: true });
+        return interaction.reply({ content: 'Apenas membros da equipe podem transferir tickets.', flags: [MessageFlags.Ephemeral] });
     }
 
     try {
@@ -81,7 +90,7 @@ async function handleTransferMenu(interaction) {
         );
 
         if (staffMembers.size === 0) {
-            return interaction.reply({ content: 'Nenhum membro da equipe encontrado para transferir.', ephemeral: true });
+            return interaction.reply({ content: 'Nenhum membro da equipe encontrado para transferir.', flags: [MessageFlags.Ephemeral] });
         }
 
         const select = new StringSelectMenuBuilder()
@@ -100,11 +109,11 @@ async function handleTransferMenu(interaction) {
         await interaction.reply({ 
             content: 'Selecione abaixo para quem deseja transferir este ticket:', 
             components: [row], 
-            ephemeral: true 
+            flags: [MessageFlags.Ephemeral] 
         });
     } catch (err) {
         logger.error('Error in handleTransferMenu: %s', err.message);
-        await interaction.reply({ content: 'Erro ao buscar membros da equipe.', ephemeral: true });
+        await interaction.reply({ content: 'Erro ao buscar membros da equipe.', flags: [MessageFlags.Ephemeral] });
     }
 }
 
@@ -117,7 +126,7 @@ async function handleClaim(interaction) {
                   interaction.member.permissions.has(PermissionFlagsBits.Administrator);
 
   if (!isStaff) {
-    return interaction.reply({ content: 'Apenas membros da equipe podem assumir tickets.', ephemeral: true });
+    return interaction.reply({ content: 'Apenas membros da equipe podem assumir tickets.', flags: [MessageFlags.Ephemeral] });
   }
 
   await interaction.deferReply();
@@ -173,7 +182,7 @@ async function handleClose(interaction) {
                   interaction.channel.name.includes(interaction.user.username);
 
   if (!isStaff) {
-    return interaction.reply({ content: 'Você não tem permissão para fechar este ticket.', ephemeral: true });
+    return interaction.reply({ content: 'Você não tem permissão para fechar este ticket.', flags: [MessageFlags.Ephemeral] });
   }
 
   await interaction.deferReply();
@@ -189,8 +198,16 @@ async function handleClose(interaction) {
         SendMessages: false,
     });
 
-    // Rename channel
-    await interaction.channel.setName(`closed-${ticket.ticket_number}`);
+    // 1. Move to CLOSED category and rename (via status manager)
+    const hasClosedConfig = TICKET_CATEGORIES.FECHADO && TICKET_CATEGORIES.FECHADO !== 'ID_DA_CATEGORIA_FECHADO';
+    if (hasClosedConfig) {
+        await updateTicketStatus(interaction.channel, 'FECHADO', interaction).catch(err => {
+            logger.warn('Failed to move ticket to CLOSED category: %s', err.message);
+        });
+    } else {
+        // Fallback: Just rename if no category is configured
+        await interaction.channel.setName(`closed-${ticket.ticket_number}`);
+    }
 
     const durationMs = Date.now() - new Date(ticket.created_at).getTime();
     const durationMin = Math.floor(durationMs / 60000);
@@ -223,6 +240,22 @@ async function handleClose(interaction) {
         number: ticket.ticket_number, 
         duration: durationStr 
     });
+
+    // Role Management: Revert to Client Role, Remove Active Client Role
+    try {
+      const config = await getGuildConfig(interaction.guildId);
+      const member = await interaction.guild.members.fetch(ticket.user_id).catch(() => null);
+      if (member && config) {
+        if (config.client_role_id) {
+          await member.roles.add(config.client_role_id).catch(e => logger.warn(`Failed to add client role on close: ${e.message}`));
+        }
+        if (config.active_client_role_id) {
+          await member.roles.remove(config.active_client_role_id).catch(e => logger.warn(`Failed to remove active client role on close: ${e.message}`));
+        }
+      }
+    } catch (roleErr) {
+      logger.error('Error managing roles on ticket close: %o', roleErr);
+    }
 
   } catch (err) {
     incMetric('errorsCount');
@@ -258,10 +291,11 @@ async function showDeleteModal(interaction) {
 async function handleDelete(interaction) {
   const input = interaction.fields.getTextInputValue('confirm_input');
   if (input.toUpperCase() !== 'DELETAR') {
-    return interaction.reply({ content: 'Confirmação inválida. Operação cancelada.', ephemeral: true });
+    return interaction.reply({ content: 'Confirmação inválida. Operação cancelada.', flags: [MessageFlags.Ephemeral] });
   }
 
-  await interaction.reply('Gerando transcrição e deletando canal em 5 segundos...');
+  await interaction.deferReply();
+  await interaction.editReply('Gerando transcrição e deletando canal em 5 segundos...');
 
   try {
     const ticket = await getTicketByChannel(interaction.channelId);
@@ -320,7 +354,7 @@ async function handleDelete(interaction) {
   } catch (err) {
     incMetric('errorsCount');
     logger.error('Error in handleDelete: %s', err.message);
-    await interaction.followUp({ content: 'Erro ao deletar o ticket.', ephemeral: true });
+    await interaction.followUp({ content: 'Erro ao deletar o ticket.', flags: [MessageFlags.Ephemeral] });
   }
 }
 
@@ -338,7 +372,7 @@ async function handleTransfer(interaction) {
             .setColor('#3498db')
             .setDescription(`📤 Ticket transferido para <@${newStaffId}>.`);
 
-        await interaction.followUp({ embeds: [embed] });
+        await interaction.editReply({ embeds: [embed] });
 
         // Log Action
         await logAction(interaction.guild, 'TICKET_TRANSFER', interaction.user, { 
@@ -348,7 +382,127 @@ async function handleTransfer(interaction) {
     } catch (err) {
         incMetric('errorsCount');
         logger.error('Error in handleTransfer: %s', err.message);
-        await interaction.followUp({ content: 'Erro ao transferir o ticket.', ephemeral: true });
+        if (interaction.deferred || interaction.replied) {
+            await interaction.editReply({ content: 'Erro ao transferir o ticket.' });
+        } else {
+            await interaction.reply({ content: 'Erro ao transferir o ticket.', flags: [MessageFlags.Ephemeral] });
+        }
+    }
+}
+
+/**
+ * Handle Staff Accepting a ticket.
+ */
+async function handleAccept(interaction) {
+    const staffRoles = await getStaffRoles(interaction.guildId);
+    const isStaff = interaction.member.roles.cache.some(r => staffRoles.includes(r.id)) || 
+                    interaction.member.permissions.has(PermissionFlagsBits.Administrator);
+
+    if (!isStaff) {
+        return interaction.reply({ content: 'Apenas membros da equipe podem aceitar tickets.', flags: [MessageFlags.Ephemeral] });
+    }
+
+    await interaction.deferReply();
+
+    try {
+        // 1. Mark as claimed in DB
+        await claimTicket(interaction.channelId, interaction.user.id);
+
+        const ticket = await getTicketByChannel(interaction.channelId);
+
+        // 2. Move to ACEITE category and sync permissions
+        await updateTicketStatus(interaction.channel, 'ACEITE', interaction);
+        
+        // 3. Restore client permissions (status sync with lockPermissions: true wipes specific user overwrites)
+        if (ticket) {
+            await interaction.channel.permissionOverwrites.edit(ticket.user_id, {
+                ViewChannel: true,
+                SendMessages: true,
+                ReadMessageHistory: true,
+                AttachFiles: true
+            }).catch(e => logger.warn(`Failed to restore creator permissions: ${e.message}`));
+        }
+
+        const embed = new EmbedBuilder()
+            .setColor('#2ecc71')
+            .setDescription(`✅ O ticket foi aceito e assumido por ${interaction.user}. Movido para **Ticket Aceitos**.`);
+
+        await interaction.editReply({ embeds: [embed] });
+
+        // 4. Create Private Thread (Group Chat)
+        try {
+            const thread = await interaction.channel.threads.create({
+                name: `bate-papo-${interaction.channel.name}`,
+                autoArchiveDuration: 1440,
+                type: ChannelType.PrivateThread,
+                reason: 'Group chat for accepted ticket'
+            });
+
+            // Invite creator if found
+            if (ticket) {
+                await thread.members.add(ticket.user_id).catch(e => logger.warn(`Failed to add creator to thread: ${e.message}`));
+            }
+            
+            // Add the staff member who accepted
+            await thread.members.add(interaction.user.id).catch(e => logger.warn(`Failed to add staff to thread: ${e.message}`));
+
+            const threadEmbed = new EmbedBuilder()
+                .setTitle('🚀 Bate-papo do Projeto')
+                .setDescription(`Este é o espaço privado para discussão do projeto entre <@${ticket?.user_id}> e a equipe.\n\n**Staff Responsável:** ${interaction.user}`)
+                .setColor('#2ecc71')
+                .setTimestamp();
+
+            await thread.send({ 
+                content: `Olá <@${ticket?.user_id}>! Este bate-papo foi criado para tratarmos os detalhes do seu pedido.`,
+                embeds: [threadEmbed] 
+            });
+
+            logger.info(`Private thread created for ticket ${interaction.channelId}`);
+        } catch (threadErr) {
+            logger.error('Error creating private thread: %o', threadErr);
+            await interaction.followUp({ content: 'O ticket foi aceito, mas houve um erro ao criar o bate-papo privado.', flags: [MessageFlags.Ephemeral] });
+        }
+
+        // 5. Disable the accept button and mark as claimed
+        const originalMessage = interaction.message;
+        const newRows = originalMessage.components.map(row => {
+            const newRow = new ActionRowBuilder();
+            row.components.forEach(comp => {
+                const btn = ButtonBuilder.from(comp);
+                if (comp.customId.startsWith('ticket_accept_')) {
+                    btn.setDisabled(true).setLabel('Aceito').setStyle(ButtonStyle.Success);
+                }
+                newRow.addComponents(btn);
+            });
+            return newRow;
+        });
+
+        await originalMessage.edit({ components: newRows });
+
+        // 6. Log Action
+        await logAction(interaction.guild, 'TICKET_CLAIM', interaction.user, { channel: interaction.channel });
+
+        // 7. Role Management: Add Active Client Role, Remove Client Role
+        try {
+          const config = await getGuildConfig(interaction.guildId);
+          if (ticket && config) {
+            const member = await interaction.guild.members.fetch(ticket.user_id).catch(() => null);
+            if (member) {
+              if (config.active_client_role_id) {
+                await member.roles.add(config.active_client_role_id).catch(e => logger.warn(`Failed to add active client role: ${e.message}`));
+              }
+              if (config.client_role_id) {
+                await member.roles.remove(config.client_role_id).catch(e => logger.warn(`Failed to remove client role: ${e.message}`));
+              }
+            }
+          }
+        } catch (roleErr) {
+          logger.error('Error managing roles on ticket accept: %o', roleErr);
+        }
+
+    } catch (err) {
+        incMetric('errorsCount');
+        logger.error('Error in handleAccept: %s', err.message);
     }
 }
 
