@@ -2,13 +2,13 @@
   "name": "nexoticket",
   "version": "1.0.0",
   "description": "**NexoTicket** é um bot de tickets para Discord avançado, construído com foco em segurança, performance e facilidade de uso.",
-  "main": "src/index.js",
+  "main": "apps/bot/index.js",
   "scripts": {
-    "start": "node src/database/migrate.js && node src/index.js",
-    "dev": "nodemon src/index.js",
-    "migrate": "node src/database/migrate.js",
+    "start": "node apps/bot/src/database/migrate.js && node apps/bot/index.js",
+    "dev": "nodemon apps/bot/index.js",
+    "migrate": "node apps/bot/src/database/migrate.js",
     "lint": "eslint .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [
     "discord",
@@ -23,12 +23,17 @@
   "type": "commonjs",
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
     "discord.js": "^14.25.1",
     "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
     "winston": "^3.19.0"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
+    "jest": "^30.2.0",
     "nodemon": "^3.1.0"
   }
 }

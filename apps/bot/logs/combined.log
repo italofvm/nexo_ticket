@@ -1,0 +1,461 @@
+{"level":"info","message":"Environment variables validated successfully.","service":"nexoticket","timestamp":"2026-02-05 09:14:27"}
+{"level":"info","message":"Initializing NexoTicket in production mode...","service":"nexoticket","timestamp":"2026-02-05 09:14:30"}
+{"level":"info","message":"Healthcheck server successfully started on port 3002","service":"nexoticket","timestamp":"2026-02-05 09:14:30"}
+{"level":"info","message":"Executed query in 987ms","service":"nexoticket","timestamp":"2026-02-05 09:14:31"}
+{"level":"info","message":"Database connection established.","service":"nexoticket","timestamp":"2026-02-05 09:14:31"}
+{"level":"info","message":"Starting database migrations...","service":"nexoticket","timestamp":"2026-02-05 09:14:31"}
+{"level":"info","message":"Migrations completed successfully.","service":"nexoticket","timestamp":"2026-02-05 09:14:32"}
+{"level":"info","message":"Loaded event: guildCreate","service":"nexoticket","timestamp":"2026-02-05 09:14:32"}
+{"level":"info","message":"Loaded event: guildMemberAdd","service":"nexoticket","timestamp":"2026-02-05 09:14:32"}
+{"level":"info","message":"Loaded event: interactionCreate","service":"nexoticket","timestamp":"2026-02-05 09:14:32"}
+{"level":"info","message":"Loaded event: ready","service":"nexoticket","timestamp":"2026-02-05 09:14:32"}
+{"level":"info","message":"Loaded command metadata: category","service":"nexoticket","timestamp":"2026-02-05 09:14:32"}
+{"level":"info","message":"Loaded command metadata: config","service":"nexoticket","timestamp":"2026-02-05 09:14:32"}
+{"level":"info","message":"Loaded command metadata: panel","service":"nexoticket","timestamp":"2026-02-05 09:14:32"}
+{"level":"info","message":"Loaded command metadata: ping","service":"nexoticket","timestamp":"2026-02-05 09:14:32"}
+{"level":"info","message":"Loaded command metadata: stats","service":"nexoticket","timestamp":"2026-02-05 09:14:32"}
+{"level":"info","message":"Started refreshing 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 09:14:32"}
+{"level":"info","message":"Successfully reloaded 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 09:14:33"}
+{"level":"info","message":"Ready! Logged in as NexoTicket#0846","service":"nexoticket","timestamp":"2026-02-05 09:14:34"}
+{"level":"info","message":"Syncing configuration for 2 guilds...","service":"nexoticket","timestamp":"2026-02-05 09:14:34"}
+{"level":"info","message":"Guild configuration sync completed.","service":"nexoticket","timestamp":"2026-02-05 09:14:34"}
+{"level":"info","message":"Environment variables validated successfully.","service":"nexoticket","timestamp":"2026-02-05 09:23:32"}
+{"level":"info","message":"Initializing NexoTicket in production mode...","service":"nexoticket","timestamp":"2026-02-05 09:23:35"}
+{"level":"info","message":"Healthcheck server successfully started on port 3002","service":"nexoticket","timestamp":"2026-02-05 09:23:35"}
+{"level":"info","message":"Executed query in 903ms","service":"nexoticket","timestamp":"2026-02-05 09:23:36"}
+{"level":"info","message":"Database connection established.","service":"nexoticket","timestamp":"2026-02-05 09:23:36"}
+{"level":"info","message":"Starting database migrations...","service":"nexoticket","timestamp":"2026-02-05 09:23:36"}
+{"level":"info","message":"Migrations completed successfully.","service":"nexoticket","timestamp":"2026-02-05 09:23:38"}
+{"level":"info","message":"Loaded event: guildCreate","service":"nexoticket","timestamp":"2026-02-05 09:23:38"}
+{"level":"info","message":"Loaded event: guildMemberAdd","service":"nexoticket","timestamp":"2026-02-05 09:23:38"}
+{"level":"info","message":"Loaded event: interactionCreate","service":"nexoticket","timestamp":"2026-02-05 09:23:38"}
+{"level":"info","message":"Loaded event: ready","service":"nexoticket","timestamp":"2026-02-05 09:23:38"}
+{"level":"info","message":"Loaded command metadata: category","service":"nexoticket","timestamp":"2026-02-05 09:23:38"}
+{"level":"info","message":"Loaded command metadata: config","service":"nexoticket","timestamp":"2026-02-05 09:23:38"}
+{"level":"info","message":"Loaded command metadata: panel","service":"nexoticket","timestamp":"2026-02-05 09:23:38"}
+{"level":"info","message":"Loaded command metadata: ping","service":"nexoticket","timestamp":"2026-02-05 09:23:38"}
+{"level":"info","message":"Loaded command metadata: stats","service":"nexoticket","timestamp":"2026-02-05 09:23:38"}
+{"level":"info","message":"Started refreshing 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 09:23:38"}
+{"level":"info","message":"Successfully reloaded 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 09:23:38"}
+{"level":"info","message":"Ready! Logged in as NexoTicket#0846","service":"nexoticket","timestamp":"2026-02-05 09:23:39"}
+{"level":"info","message":"Syncing configuration for 2 guilds...","service":"nexoticket","timestamp":"2026-02-05 09:23:39"}
+{"level":"info","message":"Guild configuration sync completed.","service":"nexoticket","timestamp":"2026-02-05 09:23:39"}
+{"level":"info","message":"Environment variables validated successfully.","service":"nexoticket","timestamp":"2026-02-05 09:25:17"}
+{"level":"info","message":"Initializing NexoTicket in production mode...","service":"nexoticket","timestamp":"2026-02-05 09:25:19"}
+{"level":"info","message":"Healthcheck server successfully started on port 3002","service":"nexoticket","timestamp":"2026-02-05 09:25:19"}
+{"level":"info","message":"Executed query in 293ms","service":"nexoticket","timestamp":"2026-02-05 09:25:20"}
+{"level":"info","message":"Database connection established.","service":"nexoticket","timestamp":"2026-02-05 09:25:20"}
+{"level":"info","message":"Starting database migrations...","service":"nexoticket","timestamp":"2026-02-05 09:25:20"}
+{"level":"info","message":"Migrations completed successfully.","service":"nexoticket","timestamp":"2026-02-05 09:25:21"}
+{"level":"info","message":"Loaded event: guildCreate","service":"nexoticket","timestamp":"2026-02-05 09:25:21"}
+{"level":"info","message":"Loaded event: guildMemberAdd","service":"nexoticket","timestamp":"2026-02-05 09:25:21"}
+{"level":"info","message":"Loaded event: interactionCreate","service":"nexoticket","timestamp":"2026-02-05 09:25:21"}
+{"level":"info","message":"Loaded event: ready","service":"nexoticket","timestamp":"2026-02-05 09:25:21"}
+{"level":"info","message":"Loaded command metadata: category","service":"nexoticket","timestamp":"2026-02-05 09:25:21"}
+{"level":"info","message":"Loaded command metadata: config","service":"nexoticket","timestamp":"2026-02-05 09:25:21"}
+{"level":"info","message":"Loaded command metadata: panel","service":"nexoticket","timestamp":"2026-02-05 09:25:21"}
+{"level":"info","message":"Loaded command metadata: ping","service":"nexoticket","timestamp":"2026-02-05 09:25:21"}
+{"level":"info","message":"Loaded command metadata: stats","service":"nexoticket","timestamp":"2026-02-05 09:25:21"}
+{"level":"info","message":"Started refreshing 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 09:25:21"}
+{"level":"info","message":"Successfully reloaded 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 09:25:21"}
+{"level":"info","message":"Ready! Logged in as NexoTicket#0846","service":"nexoticket","timestamp":"2026-02-05 09:25:22"}
+{"level":"info","message":"Syncing configuration for 2 guilds...","service":"nexoticket","timestamp":"2026-02-05 09:25:22"}
+{"level":"info","message":"Guild configuration sync completed.","service":"nexoticket","timestamp":"2026-02-05 09:25:23"}
+{"level":"info","message":"Environment variables validated successfully.","service":"nexoticket","timestamp":"2026-02-05 09:29:10"}
+{"level":"info","message":"Initializing NexoTicket in production mode...","service":"nexoticket","timestamp":"2026-02-05 09:29:12"}
+{"level":"info","message":"Healthcheck server successfully started on port 3002","service":"nexoticket","timestamp":"2026-02-05 09:29:12"}
+{"level":"info","message":"Executed query in 207ms","service":"nexoticket","timestamp":"2026-02-05 09:29:12"}
+{"level":"info","message":"Database connection established.","service":"nexoticket","timestamp":"2026-02-05 09:29:12"}
+{"level":"info","message":"Starting database migrations...","service":"nexoticket","timestamp":"2026-02-05 09:29:12"}
+{"level":"info","message":"Migrations completed successfully.","service":"nexoticket","timestamp":"2026-02-05 09:29:13"}
+{"level":"info","message":"Loaded event: guildCreate","service":"nexoticket","timestamp":"2026-02-05 09:29:13"}
+{"level":"info","message":"Loaded event: guildMemberAdd","service":"nexoticket","timestamp":"2026-02-05 09:29:13"}
+{"level":"info","message":"Loaded event: interactionCreate","service":"nexoticket","timestamp":"2026-02-05 09:29:13"}
+{"level":"info","message":"Loaded event: ready","service":"nexoticket","timestamp":"2026-02-05 09:29:13"}
+{"level":"info","message":"Loaded command metadata: category","service":"nexoticket","timestamp":"2026-02-05 09:29:13"}
+{"level":"info","message":"Loaded command metadata: config","service":"nexoticket","timestamp":"2026-02-05 09:29:13"}
+{"level":"info","message":"Loaded command metadata: panel","service":"nexoticket","timestamp":"2026-02-05 09:29:13"}
+{"level":"info","message":"Loaded command metadata: ping","service":"nexoticket","timestamp":"2026-02-05 09:29:13"}
+{"level":"info","message":"Loaded command metadata: stats","service":"nexoticket","timestamp":"2026-02-05 09:29:13"}
+{"level":"info","message":"Started refreshing 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 09:29:13"}
+{"level":"info","message":"Successfully reloaded 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 09:29:14"}
+{"level":"info","message":"Ready! Logged in as NexoTicket#0846","service":"nexoticket","timestamp":"2026-02-05 09:29:15"}
+{"level":"info","message":"Syncing configuration for 2 guilds...","service":"nexoticket","timestamp":"2026-02-05 09:29:15"}
+{"level":"info","message":"Guild configuration sync completed.","service":"nexoticket","timestamp":"2026-02-05 09:29:15"}
+{"level":"info","message":"Environment variables validated successfully.","service":"nexoticket","timestamp":"2026-02-05 09:35:08"}
+{"level":"info","message":"Initializing NexoTicket in production mode...","service":"nexoticket","timestamp":"2026-02-05 09:35:52"}
+{"level":"info","message":"Healthcheck server successfully started on port 3002","service":"nexoticket","timestamp":"2026-02-05 09:35:52"}
+{"level":"info","message":"Executed query in 267ms","service":"nexoticket","timestamp":"2026-02-05 09:35:52"}
+{"level":"info","message":"Database connection established.","service":"nexoticket","timestamp":"2026-02-05 09:35:52"}
+{"level":"info","message":"Starting database migrations...","service":"nexoticket","timestamp":"2026-02-05 09:35:52"}
+{"level":"info","message":"Migrations completed successfully.","service":"nexoticket","timestamp":"2026-02-05 09:35:54"}
+{"level":"info","message":"Loaded event: guildCreate","service":"nexoticket","timestamp":"2026-02-05 09:35:54"}
+{"level":"info","message":"Loaded event: guildMemberAdd","service":"nexoticket","timestamp":"2026-02-05 09:35:54"}
+{"level":"info","message":"Loaded event: interactionCreate","service":"nexoticket","timestamp":"2026-02-05 09:35:54"}
+{"level":"info","message":"Loaded event: ready","service":"nexoticket","timestamp":"2026-02-05 09:35:54"}
+{"level":"info","message":"Loaded command metadata: category","service":"nexoticket","timestamp":"2026-02-05 09:35:54"}
+{"level":"info","message":"Loaded command metadata: config","service":"nexoticket","timestamp":"2026-02-05 09:35:54"}
+{"level":"info","message":"Loaded command metadata: panel","service":"nexoticket","timestamp":"2026-02-05 09:35:54"}
+{"level":"info","message":"Loaded command metadata: ping","service":"nexoticket","timestamp":"2026-02-05 09:35:54"}
+{"level":"info","message":"Loaded command metadata: stats","service":"nexoticket","timestamp":"2026-02-05 09:35:54"}
+{"level":"info","message":"Started refreshing 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 09:35:54"}
+{"level":"info","message":"Successfully reloaded 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 09:35:54"}
+{"level":"info","message":"Ready! Logged in as NexoTicket#0846","service":"nexoticket","timestamp":"2026-02-05 09:35:55"}
+{"level":"info","message":"Syncing configuration for 2 guilds...","service":"nexoticket","timestamp":"2026-02-05 09:35:55"}
+{"level":"info","message":"Guild configuration sync completed.","service":"nexoticket","timestamp":"2026-02-05 09:35:55"}
+{"level":"info","message":"Environment variables validated successfully.","service":"nexoticket","timestamp":"2026-02-05 09:38:56"}
+{"level":"info","message":"Initializing NexoTicket in production mode...","service":"nexoticket","timestamp":"2026-02-05 09:38:59"}
+{"level":"info","message":"Healthcheck server successfully started on port 3002","service":"nexoticket","timestamp":"2026-02-05 09:38:59"}
+{"level":"info","message":"Executed query in 348ms","service":"nexoticket","timestamp":"2026-02-05 09:39:00"}
+{"level":"info","message":"Database connection established.","service":"nexoticket","timestamp":"2026-02-05 09:39:00"}
+{"level":"info","message":"Starting database migrations...","service":"nexoticket","timestamp":"2026-02-05 09:39:00"}
+{"level":"info","message":"Migrations completed successfully.","service":"nexoticket","timestamp":"2026-02-05 09:39:01"}
+{"level":"info","message":"Loaded event: guildCreate","service":"nexoticket","timestamp":"2026-02-05 09:39:01"}
+{"level":"info","message":"Loaded event: guildMemberAdd","service":"nexoticket","timestamp":"2026-02-05 09:39:01"}
+{"level":"info","message":"Loaded event: interactionCreate","service":"nexoticket","timestamp":"2026-02-05 09:39:02"}
+{"level":"info","message":"Loaded event: ready","service":"nexoticket","timestamp":"2026-02-05 09:39:02"}
+{"level":"info","message":"Loaded command metadata: category","service":"nexoticket","timestamp":"2026-02-05 09:39:02"}
+{"level":"info","message":"Loaded command metadata: config","service":"nexoticket","timestamp":"2026-02-05 09:39:02"}
+{"level":"info","message":"Loaded command metadata: panel","service":"nexoticket","timestamp":"2026-02-05 09:39:02"}
+{"level":"info","message":"Loaded command metadata: ping","service":"nexoticket","timestamp":"2026-02-05 09:39:03"}
+{"level":"info","message":"Loaded command metadata: stats","service":"nexoticket","timestamp":"2026-02-05 09:39:03"}
+{"level":"info","message":"Started refreshing 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 09:39:03"}
+{"level":"info","message":"Successfully reloaded 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 09:39:03"}
+{"level":"info","message":"Ready! Logged in as NexoTicket#0846","service":"nexoticket","timestamp":"2026-02-05 09:39:04"}
+{"level":"info","message":"Syncing configuration for 2 guilds...","service":"nexoticket","timestamp":"2026-02-05 09:39:04"}
+{"level":"info","message":"Guild configuration sync completed.","service":"nexoticket","timestamp":"2026-02-05 09:39:04"}
+{"level":"info","message":"--- Periodic Metrics Report ---","service":"nexoticket","timestamp":"2026-02-05 10:39:03"}
+{"level":"info","message":"Uptime: 3601s | Commands: 0 | Tickets Open/Close: 0/0 | Errors: 0","service":"nexoticket","timestamp":"2026-02-05 10:39:03"}
+{"level":"info","message":"Environment variables validated successfully.","service":"nexoticket","timestamp":"2026-02-05 10:45:56"}
+{"level":"info","message":"Initializing NexoTicket in production mode...","service":"nexoticket","timestamp":"2026-02-05 10:46:04"}
+{"level":"info","message":"Healthcheck server successfully started on port 3002","service":"nexoticket","timestamp":"2026-02-05 10:46:04"}
+{"level":"info","message":"File logging enabled. Error log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/error.log, Combined log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/combined.log","service":"nexoticket","timestamp":"2026-02-05 10:46:41"}
+{"level":"info","message":"Environment variables validated successfully.","service":"nexoticket","timestamp":"2026-02-05 10:46:41"}
+{"level":"info","message":"Initializing NexoTicket in production mode...","service":"nexoticket","timestamp":"2026-02-05 10:46:48"}
+{"level":"info","message":"Healthcheck server successfully started on port 3002","service":"nexoticket","timestamp":"2026-02-05 10:46:48"}
+{"level":"info","message":"File logging enabled. Error log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/error.log, Combined log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/combined.log","service":"nexoticket","timestamp":"2026-02-05 10:46:42"}
+{"level":"info","message":"Environment variables validated successfully.","service":"nexoticket","timestamp":"2026-02-05 10:46:42"}
+{"level":"info","message":"Initializing NexoTicket in production mode...","service":"nexoticket","timestamp":"2026-02-05 10:46:48"}
+{"level":"error","message":"Uncaught Exception: Error: listen EADDRINUSE: address already in use 0.0.0.0:3002\n    at Server.setupListenHandle [as _listen2] (node:net:1940:16)\n    at listenInCluster (node:net:1997:12)\n    at node:net:2206:7\n    at process.processTicksAndRejections (node:internal/process/task_queues:89:21) {\n  [stack]: [Getter/Setter],\n  [message]: 'listen EADDRINUSE: address already in use 0.0.0.0:3002',\n  code: 'EADDRINUSE',\n  errno: -48,\n  syscall: 'listen',\n  address: '0.0.0.0',\n  port: 3002,\n  [Symbol(kEnhanceStackBeforeInspector)]: [Function: bound enhanceStackTrace] {\n    [length]: 0,\n    [name]: 'bound enhanceStackTrace'\n  }\n}","service":"nexoticket","timestamp":"2026-02-05 10:46:48"}
+{"level":"info","message":"Executed query in 1530ms","service":"nexoticket","timestamp":"2026-02-05 10:46:49"}
+{"level":"info","message":"Database connection established.","service":"nexoticket","timestamp":"2026-02-05 10:46:49"}
+{"level":"info","message":"Starting database migrations...","service":"nexoticket","timestamp":"2026-02-05 10:46:49"}
+{"level":"info","message":"Migrations completed successfully.","service":"nexoticket","timestamp":"2026-02-05 10:46:50"}
+{"level":"info","message":"Loaded event: guildCreate","service":"nexoticket","timestamp":"2026-02-05 10:46:50"}
+{"level":"info","message":"Loaded event: guildMemberAdd","service":"nexoticket","timestamp":"2026-02-05 10:46:50"}
+{"level":"info","message":"Loaded event: interactionCreate","service":"nexoticket","timestamp":"2026-02-05 10:46:51"}
+{"level":"info","message":"Loaded event: ready","service":"nexoticket","timestamp":"2026-02-05 10:46:51"}
+{"level":"info","message":"Loaded command metadata: category","service":"nexoticket","timestamp":"2026-02-05 10:46:51"}
+{"level":"info","message":"Loaded command metadata: config","service":"nexoticket","timestamp":"2026-02-05 10:46:51"}
+{"level":"info","message":"Loaded command metadata: panel","service":"nexoticket","timestamp":"2026-02-05 10:46:51"}
+{"level":"info","message":"Loaded command metadata: ping","service":"nexoticket","timestamp":"2026-02-05 10:46:51"}
+{"level":"info","message":"Loaded command metadata: stats","service":"nexoticket","timestamp":"2026-02-05 10:46:51"}
+{"level":"info","message":"Started refreshing 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 10:46:51"}
+{"level":"info","message":"Successfully reloaded 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 10:46:51"}
+{"level":"info","message":"Ready! Logged in as NexoTicket#0846","service":"nexoticket","timestamp":"2026-02-05 10:46:52"}
+{"level":"info","message":"Syncing configuration for 2 guilds...","service":"nexoticket","timestamp":"2026-02-05 10:46:52"}
+{"level":"info","message":"Guild configuration sync completed.","service":"nexoticket","timestamp":"2026-02-05 10:46:52"}
+{"level":"info","message":"File logging enabled. Error log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/error.log, Combined log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/combined.log","service":"nexoticket","timestamp":"2026-02-05 10:58:39"}
+{"level":"info","message":"Environment variables validated successfully.","service":"nexoticket","timestamp":"2026-02-05 10:58:39"}
+{"level":"info","message":"Initializing NexoTicket in production mode...","service":"nexoticket","timestamp":"2026-02-05 10:58:48"}
+{"level":"info","message":"Healthcheck server successfully started on port 3002","service":"nexoticket","timestamp":"2026-02-05 10:58:48"}
+{"level":"info","message":"Executed query in 1063ms","service":"nexoticket","timestamp":"2026-02-05 10:58:49"}
+{"level":"info","message":"Database connection established.","service":"nexoticket","timestamp":"2026-02-05 10:58:49"}
+{"level":"info","message":"Starting database migrations...","service":"nexoticket","timestamp":"2026-02-05 10:58:49"}
+{"level":"info","message":"Migrations completed successfully.","service":"nexoticket","timestamp":"2026-02-05 10:58:51"}
+{"level":"info","message":"Loaded event: guildCreate","service":"nexoticket","timestamp":"2026-02-05 10:58:51"}
+{"level":"info","message":"Loaded event: guildMemberAdd","service":"nexoticket","timestamp":"2026-02-05 10:58:51"}
+{"level":"info","message":"Loaded event: interactionCreate","service":"nexoticket","timestamp":"2026-02-05 10:58:51"}
+{"level":"info","message":"Loaded event: ready","service":"nexoticket","timestamp":"2026-02-05 10:58:51"}
+{"level":"info","message":"Loaded command metadata: category","service":"nexoticket","timestamp":"2026-02-05 10:58:51"}
+{"level":"info","message":"Loaded command metadata: config","service":"nexoticket","timestamp":"2026-02-05 10:58:51"}
+{"level":"info","message":"Loaded command metadata: panel","service":"nexoticket","timestamp":"2026-02-05 10:58:51"}
+{"level":"info","message":"Loaded command metadata: ping","service":"nexoticket","timestamp":"2026-02-05 10:58:51"}
+{"level":"info","message":"Loaded command metadata: stats","service":"nexoticket","timestamp":"2026-02-05 10:58:51"}
+{"level":"info","message":"Started refreshing 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 10:58:51"}
+{"level":"info","message":"Successfully reloaded 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 10:58:51"}
+{"level":"info","message":"Ready! Logged in as NexoTicket#0846","service":"nexoticket","timestamp":"2026-02-05 10:58:52"}
+{"level":"info","message":"Syncing configuration for 2 guilds...","service":"nexoticket","timestamp":"2026-02-05 10:58:52"}
+{"level":"info","message":"Guild configuration sync completed.","service":"nexoticket","timestamp":"2026-02-05 10:58:52"}
+{"level":"info","message":"Executed query in 31ms","service":"nexoticket","timestamp":"2026-02-05 11:04:35"}
+{"level":"info","message":"Canal 1468970570560569456 movido para categoria ABERTO (1466455105388675275)","service":"nexoticket","timestamp":"2026-02-05 11:04:36"}
+{"level":"info","message":"File logging enabled. Error log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/error.log, Combined log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/combined.log","service":"nexoticket","timestamp":"2026-02-05 11:08:56"}
+{"level":"info","message":"Environment variables validated successfully.","service":"nexoticket","timestamp":"2026-02-05 11:08:56"}
+{"level":"info","message":"Initializing NexoTicket in production mode...","service":"nexoticket","timestamp":"2026-02-05 11:09:01"}
+{"level":"info","message":"Healthcheck server successfully started on port 3002","service":"nexoticket","timestamp":"2026-02-05 11:09:01"}
+{"level":"info","message":"Executed query in 803ms","service":"nexoticket","timestamp":"2026-02-05 11:09:02"}
+{"level":"info","message":"Database connection established.","service":"nexoticket","timestamp":"2026-02-05 11:09:02"}
+{"level":"info","message":"Starting database migrations...","service":"nexoticket","timestamp":"2026-02-05 11:09:02"}
+{"level":"info","message":"Migrations completed successfully.","service":"nexoticket","timestamp":"2026-02-05 11:09:03"}
+{"level":"info","message":"Loaded event: guildCreate","service":"nexoticket","timestamp":"2026-02-05 11:09:03"}
+{"level":"info","message":"Loaded event: guildMemberAdd","service":"nexoticket","timestamp":"2026-02-05 11:09:03"}
+{"level":"info","message":"Loaded event: interactionCreate","service":"nexoticket","timestamp":"2026-02-05 11:09:03"}
+{"level":"info","message":"Loaded event: ready","service":"nexoticket","timestamp":"2026-02-05 11:09:03"}
+{"level":"info","message":"Loaded command metadata: category","service":"nexoticket","timestamp":"2026-02-05 11:09:03"}
+{"level":"info","message":"Loaded command metadata: config","service":"nexoticket","timestamp":"2026-02-05 11:09:03"}
+{"level":"info","message":"Loaded command metadata: panel","service":"nexoticket","timestamp":"2026-02-05 11:09:03"}
+{"level":"info","message":"Loaded command metadata: ping","service":"nexoticket","timestamp":"2026-02-05 11:09:03"}
+{"level":"info","message":"Loaded command metadata: stats","service":"nexoticket","timestamp":"2026-02-05 11:09:03"}
+{"level":"info","message":"Started refreshing 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 11:09:03"}
+{"level":"info","message":"Successfully reloaded 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 11:09:04"}
+{"level":"info","message":"Ready! Logged in as NexoTicket#0846","service":"nexoticket","timestamp":"2026-02-05 11:09:05"}
+{"level":"info","message":"Syncing configuration for 2 guilds...","service":"nexoticket","timestamp":"2026-02-05 11:09:05"}
+{"level":"info","message":"Guild configuration sync completed.","service":"nexoticket","timestamp":"2026-02-05 11:09:05"}
+{"level":"info","message":"File logging enabled. Error log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/error.log, Combined log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/combined.log","service":"nexoticket","timestamp":"2026-02-05 11:09:14"}
+{"level":"info","message":"Environment variables validated successfully.","service":"nexoticket","timestamp":"2026-02-05 11:09:14"}
+{"level":"info","message":"Initializing NexoTicket in production mode...","service":"nexoticket","timestamp":"2026-02-05 11:09:16"}
+{"level":"info","message":"Healthcheck server successfully started on port 3002","service":"nexoticket","timestamp":"2026-02-05 11:09:17"}
+{"level":"info","message":"Executed query in 321ms","service":"nexoticket","timestamp":"2026-02-05 11:09:17"}
+{"level":"info","message":"Database connection established.","service":"nexoticket","timestamp":"2026-02-05 11:09:17"}
+{"level":"info","message":"Starting database migrations...","service":"nexoticket","timestamp":"2026-02-05 11:09:17"}
+{"level":"info","message":"Migrations completed successfully.","service":"nexoticket","timestamp":"2026-02-05 11:09:18"}
+{"level":"info","message":"Loaded event: guildCreate","service":"nexoticket","timestamp":"2026-02-05 11:09:18"}
+{"level":"info","message":"Loaded event: guildMemberAdd","service":"nexoticket","timestamp":"2026-02-05 11:09:18"}
+{"level":"info","message":"Loaded event: interactionCreate","service":"nexoticket","timestamp":"2026-02-05 11:09:18"}
+{"level":"info","message":"Loaded event: ready","service":"nexoticket","timestamp":"2026-02-05 11:09:18"}
+{"level":"info","message":"Loaded command metadata: category","service":"nexoticket","timestamp":"2026-02-05 11:09:18"}
+{"level":"info","message":"Loaded command metadata: config","service":"nexoticket","timestamp":"2026-02-05 11:09:18"}
+{"level":"info","message":"Loaded command metadata: panel","service":"nexoticket","timestamp":"2026-02-05 11:09:18"}
+{"level":"info","message":"Loaded command metadata: ping","service":"nexoticket","timestamp":"2026-02-05 11:09:18"}
+{"level":"info","message":"Loaded command metadata: stats","service":"nexoticket","timestamp":"2026-02-05 11:09:18"}
+{"level":"info","message":"Started refreshing 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 11:09:18"}
+{"level":"info","message":"Successfully reloaded 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 11:09:18"}
+{"level":"info","message":"Ready! Logged in as NexoTicket#0846","service":"nexoticket","timestamp":"2026-02-05 11:09:19"}
+{"level":"info","message":"Syncing configuration for 2 guilds...","service":"nexoticket","timestamp":"2026-02-05 11:09:19"}
+{"level":"info","message":"Guild configuration sync completed.","service":"nexoticket","timestamp":"2026-02-05 11:09:19"}
+{"level":"info","message":"File logging enabled. Error log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/error.log, Combined log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/combined.log","service":"nexoticket","timestamp":"2026-02-05 11:09:38"}
+{"level":"info","message":"Environment variables validated successfully.","service":"nexoticket","timestamp":"2026-02-05 11:09:38"}
+{"level":"info","message":"Initializing NexoTicket in production mode...","service":"nexoticket","timestamp":"2026-02-05 11:09:41"}
+{"level":"info","message":"Healthcheck server successfully started on port 3002","service":"nexoticket","timestamp":"2026-02-05 11:09:41"}
+{"level":"info","message":"Executed query in 339ms","service":"nexoticket","timestamp":"2026-02-05 11:09:41"}
+{"level":"info","message":"Database connection established.","service":"nexoticket","timestamp":"2026-02-05 11:09:41"}
+{"level":"info","message":"Starting database migrations...","service":"nexoticket","timestamp":"2026-02-05 11:09:41"}
+{"level":"info","message":"Migrations completed successfully.","service":"nexoticket","timestamp":"2026-02-05 11:09:42"}
+{"level":"info","message":"Loaded event: guildCreate","service":"nexoticket","timestamp":"2026-02-05 11:09:42"}
+{"level":"info","message":"Loaded event: guildMemberAdd","service":"nexoticket","timestamp":"2026-02-05 11:09:42"}
+{"level":"info","message":"Loaded event: guildMemberRemove","service":"nexoticket","timestamp":"2026-02-05 11:09:42"}
+{"level":"info","message":"Loaded event: interactionCreate","service":"nexoticket","timestamp":"2026-02-05 11:09:42"}
+{"level":"info","message":"Loaded event: ready","service":"nexoticket","timestamp":"2026-02-05 11:09:42"}
+{"level":"info","message":"Loaded command metadata: category","service":"nexoticket","timestamp":"2026-02-05 11:09:42"}
+{"level":"info","message":"Loaded command metadata: config","service":"nexoticket","timestamp":"2026-02-05 11:09:42"}
+{"level":"info","message":"Loaded command metadata: panel","service":"nexoticket","timestamp":"2026-02-05 11:09:42"}
+{"level":"info","message":"Loaded command metadata: ping","service":"nexoticket","timestamp":"2026-02-05 11:09:42"}
+{"level":"info","message":"Loaded command metadata: stats","service":"nexoticket","timestamp":"2026-02-05 11:09:42"}
+{"level":"info","message":"Started refreshing 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 11:09:42"}
+{"level":"info","message":"Successfully reloaded 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 11:09:43"}
+{"level":"info","message":"Ready! Logged in as NexoTicket#0846","service":"nexoticket","timestamp":"2026-02-05 11:09:44"}
+{"level":"info","message":"Syncing configuration for 2 guilds...","service":"nexoticket","timestamp":"2026-02-05 11:09:44"}
+{"level":"info","message":"Guild configuration sync completed.","service":"nexoticket","timestamp":"2026-02-05 11:09:44"}
+{"level":"info","message":"File logging enabled. Error log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/error.log, Combined log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/combined.log","service":"nexoticket","timestamp":"2026-02-05 11:10:08"}
+{"level":"info","message":"Environment variables validated successfully.","service":"nexoticket","timestamp":"2026-02-05 11:10:08"}
+{"level":"info","message":"Initializing NexoTicket in production mode...","service":"nexoticket","timestamp":"2026-02-05 11:10:11"}
+{"level":"info","message":"Healthcheck server successfully started on port 3002","service":"nexoticket","timestamp":"2026-02-05 11:10:11"}
+{"level":"info","message":"Executed query in 223ms","service":"nexoticket","timestamp":"2026-02-05 11:10:11"}
+{"level":"info","message":"Database connection established.","service":"nexoticket","timestamp":"2026-02-05 11:10:11"}
+{"level":"info","message":"Starting database migrations...","service":"nexoticket","timestamp":"2026-02-05 11:10:11"}
+{"level":"info","message":"Migrations completed successfully.","service":"nexoticket","timestamp":"2026-02-05 11:10:12"}
+{"level":"info","message":"Loaded event: guildCreate","service":"nexoticket","timestamp":"2026-02-05 11:10:12"}
+{"level":"info","message":"Loaded event: guildMemberAdd","service":"nexoticket","timestamp":"2026-02-05 11:10:12"}
+{"level":"info","message":"Loaded event: guildMemberRemove","service":"nexoticket","timestamp":"2026-02-05 11:10:12"}
+{"level":"info","message":"Loaded event: interactionCreate","service":"nexoticket","timestamp":"2026-02-05 11:10:12"}
+{"level":"info","message":"Loaded event: ready","service":"nexoticket","timestamp":"2026-02-05 11:10:12"}
+{"level":"info","message":"Loaded command metadata: category","service":"nexoticket","timestamp":"2026-02-05 11:10:12"}
+{"level":"info","message":"Loaded command metadata: config","service":"nexoticket","timestamp":"2026-02-05 11:10:12"}
+{"level":"info","message":"Loaded command metadata: panel","service":"nexoticket","timestamp":"2026-02-05 11:10:12"}
+{"level":"info","message":"Loaded command metadata: ping","service":"nexoticket","timestamp":"2026-02-05 11:10:12"}
+{"level":"info","message":"Loaded command metadata: stats","service":"nexoticket","timestamp":"2026-02-05 11:10:12"}
+{"level":"info","message":"Started refreshing 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 11:10:12"}
+{"level":"info","message":"Successfully reloaded 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 11:10:13"}
+{"level":"info","message":"Ready! Logged in as NexoTicket#0846","service":"nexoticket","timestamp":"2026-02-05 11:10:13"}
+{"level":"info","message":"Syncing configuration for 2 guilds...","service":"nexoticket","timestamp":"2026-02-05 11:10:13"}
+{"level":"info","message":"Guild configuration sync completed.","service":"nexoticket","timestamp":"2026-02-05 11:10:13"}
+{"level":"info","message":"Canal 1468970570560569456 movido para categoria ACEITE (1466455262243192922)","service":"nexoticket","timestamp":"2026-02-05 11:18:53"}
+{"level":"info","message":"Private thread created for ticket 1468970570560569456","service":"nexoticket","timestamp":"2026-02-05 11:18:55"}
+{"level":"info","message":"File logging enabled. Error log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/error.log, Combined log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/combined.log","service":"nexoticket","timestamp":"2026-02-05 11:32:03"}
+{"level":"info","message":"Environment variables validated successfully.","service":"nexoticket","timestamp":"2026-02-05 11:32:03"}
+{"level":"info","message":"Initializing NexoTicket in production mode...","service":"nexoticket","timestamp":"2026-02-05 11:32:07"}
+{"level":"info","message":"Healthcheck server successfully started on port 3002","service":"nexoticket","timestamp":"2026-02-05 11:32:07"}
+{"level":"info","message":"Executed query in 1516ms","service":"nexoticket","timestamp":"2026-02-05 11:32:08"}
+{"level":"info","message":"Database connection established.","service":"nexoticket","timestamp":"2026-02-05 11:32:08"}
+{"level":"info","message":"Starting database migrations...","service":"nexoticket","timestamp":"2026-02-05 11:32:08"}
+{"level":"info","message":"Migrations completed successfully.","service":"nexoticket","timestamp":"2026-02-05 11:32:10"}
+{"level":"info","message":"Loaded event: guildCreate","service":"nexoticket","timestamp":"2026-02-05 11:32:10"}
+{"level":"info","message":"Loaded event: guildMemberAdd","service":"nexoticket","timestamp":"2026-02-05 11:32:10"}
+{"level":"info","message":"Loaded event: guildMemberRemove","service":"nexoticket","timestamp":"2026-02-05 11:32:10"}
+{"level":"info","message":"Loaded event: interactionCreate","service":"nexoticket","timestamp":"2026-02-05 11:32:10"}
+{"level":"info","message":"Loaded event: ready","service":"nexoticket","timestamp":"2026-02-05 11:32:10"}
+{"level":"info","message":"Loaded command metadata: category","service":"nexoticket","timestamp":"2026-02-05 11:32:10"}
+{"level":"info","message":"Loaded command metadata: config","service":"nexoticket","timestamp":"2026-02-05 11:32:10"}
+{"level":"info","message":"Loaded command metadata: panel","service":"nexoticket","timestamp":"2026-02-05 11:32:10"}
+{"level":"info","message":"Loaded command metadata: ping","service":"nexoticket","timestamp":"2026-02-05 11:32:10"}
+{"level":"info","message":"Loaded command metadata: stats","service":"nexoticket","timestamp":"2026-02-05 11:32:10"}
+{"level":"info","message":"Started refreshing 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 11:32:10"}
+{"level":"info","message":"Successfully reloaded 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 11:32:10"}
+{"level":"info","message":"Ready! Logged in as NexoTicket#0846","service":"nexoticket","timestamp":"2026-02-05 11:32:11"}
+{"level":"info","message":"Syncing configuration for 2 guilds...","service":"nexoticket","timestamp":"2026-02-05 11:32:11"}
+{"level":"info","message":"Guild configuration sync completed.","service":"nexoticket","timestamp":"2026-02-05 11:32:12"}
+{"level":"info","message":"File logging enabled. Error log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/error.log, Combined log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/combined.log","service":"nexoticket","timestamp":"2026-02-05 11:52:03"}
+{"level":"info","message":"Environment variables validated successfully.","service":"nexoticket","timestamp":"2026-02-05 11:52:03"}
+{"level":"info","message":"Initializing NexoTicket in production mode...","service":"nexoticket","timestamp":"2026-02-05 11:52:05"}
+{"level":"info","message":"Healthcheck server successfully started on port 3002","service":"nexoticket","timestamp":"2026-02-05 11:52:05"}
+{"level":"info","message":"Executed query in 869ms","service":"nexoticket","timestamp":"2026-02-05 11:52:06"}
+{"level":"info","message":"Database connection established.","service":"nexoticket","timestamp":"2026-02-05 11:52:06"}
+{"level":"info","message":"Starting database migrations...","service":"nexoticket","timestamp":"2026-02-05 11:52:06"}
+{"level":"info","message":"Migrations completed successfully.","service":"nexoticket","timestamp":"2026-02-05 11:52:07"}
+{"level":"info","message":"Loaded event: guildCreate","service":"nexoticket","timestamp":"2026-02-05 11:52:07"}
+{"level":"info","message":"Loaded event: guildMemberAdd","service":"nexoticket","timestamp":"2026-02-05 11:52:07"}
+{"level":"info","message":"Loaded event: guildMemberRemove","service":"nexoticket","timestamp":"2026-02-05 11:52:07"}
+{"level":"info","message":"Loaded event: interactionCreate","service":"nexoticket","timestamp":"2026-02-05 11:52:07"}
+{"level":"info","message":"Loaded event: ready","service":"nexoticket","timestamp":"2026-02-05 11:52:07"}
+{"level":"info","message":"Loaded command metadata: category","service":"nexoticket","timestamp":"2026-02-05 11:52:07"}
+{"level":"info","message":"Loaded command metadata: config","service":"nexoticket","timestamp":"2026-02-05 11:52:07"}
+{"level":"info","message":"Loaded command metadata: panel","service":"nexoticket","timestamp":"2026-02-05 11:52:07"}
+{"level":"info","message":"Loaded command metadata: ping","service":"nexoticket","timestamp":"2026-02-05 11:52:08"}
+{"level":"info","message":"Loaded command metadata: stats","service":"nexoticket","timestamp":"2026-02-05 11:52:08"}
+{"level":"info","message":"Started refreshing 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 11:52:08"}
+{"level":"info","message":"Successfully reloaded 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 11:52:08"}
+{"level":"info","message":"Ready! Logged in as NexoTicket#0846","service":"nexoticket","timestamp":"2026-02-05 11:52:09"}
+{"level":"info","message":"Syncing configuration for 2 guilds...","service":"nexoticket","timestamp":"2026-02-05 11:52:09"}
+{"level":"info","message":"Guild configuration sync completed.","service":"nexoticket","timestamp":"2026-02-05 11:52:09"}
+{"level":"info","message":"File logging enabled. Error log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/error.log, Combined log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/combined.log","service":"nexoticket","timestamp":"2026-02-05 11:52:31"}
+{"level":"info","message":"Environment variables validated successfully.","service":"nexoticket","timestamp":"2026-02-05 11:52:31"}
+{"level":"info","message":"Initializing NexoTicket in production mode...","service":"nexoticket","timestamp":"2026-02-05 11:52:34"}
+{"level":"info","message":"Healthcheck server successfully started on port 3002","service":"nexoticket","timestamp":"2026-02-05 11:52:34"}
+{"level":"info","message":"File logging enabled. Error log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/error.log, Combined log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/combined.log","service":"nexoticket","timestamp":"2026-02-05 11:52:43"}
+{"level":"info","message":"Environment variables validated successfully.","service":"nexoticket","timestamp":"2026-02-05 11:52:43"}
+{"level":"info","message":"Initializing NexoTicket in production mode...","service":"nexoticket","timestamp":"2026-02-05 11:52:48"}
+{"level":"info","message":"Healthcheck server successfully started on port 3002","service":"nexoticket","timestamp":"2026-02-05 11:52:49"}
+{"level":"info","message":"Executed query in 1764ms","service":"nexoticket","timestamp":"2026-02-05 11:52:50"}
+{"level":"info","message":"Database connection established.","service":"nexoticket","timestamp":"2026-02-05 11:52:50"}
+{"level":"info","message":"Starting database migrations...","service":"nexoticket","timestamp":"2026-02-05 11:52:50"}
+{"level":"info","message":"Migrations completed successfully.","service":"nexoticket","timestamp":"2026-02-05 11:52:52"}
+{"level":"info","message":"Loaded event: guildCreate","service":"nexoticket","timestamp":"2026-02-05 11:52:52"}
+{"level":"info","message":"Loaded event: guildMemberAdd","service":"nexoticket","timestamp":"2026-02-05 11:52:52"}
+{"level":"info","message":"Loaded event: guildMemberRemove","service":"nexoticket","timestamp":"2026-02-05 11:52:52"}
+{"level":"info","message":"Loaded event: interactionCreate","service":"nexoticket","timestamp":"2026-02-05 11:52:52"}
+{"level":"info","message":"Loaded event: ready","service":"nexoticket","timestamp":"2026-02-05 11:52:52"}
+{"level":"info","message":"Loaded command metadata: category","service":"nexoticket","timestamp":"2026-02-05 11:52:52"}
+{"level":"info","message":"Loaded command metadata: config","service":"nexoticket","timestamp":"2026-02-05 11:52:52"}
+{"level":"info","message":"Loaded command metadata: panel","service":"nexoticket","timestamp":"2026-02-05 11:52:52"}
+{"level":"info","message":"Loaded command metadata: ping","service":"nexoticket","timestamp":"2026-02-05 11:52:52"}
+{"level":"info","message":"Loaded command metadata: stats","service":"nexoticket","timestamp":"2026-02-05 11:52:52"}
+{"level":"info","message":"Started refreshing 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 11:52:52"}
+{"level":"info","message":"Successfully reloaded 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 11:52:53"}
+{"level":"info","message":"Ready! Logged in as NexoTicket#0846","service":"nexoticket","timestamp":"2026-02-05 11:52:53"}
+{"level":"info","message":"Syncing configuration for 2 guilds...","service":"nexoticket","timestamp":"2026-02-05 11:52:53"}
+{"level":"info","message":"Guild configuration sync completed.","service":"nexoticket","timestamp":"2026-02-05 11:52:53"}
+{"level":"info","message":"File logging enabled. Error log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/error.log, Combined log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/combined.log","service":"nexoticket","timestamp":"2026-02-05 11:53:16"}
+{"level":"info","message":"Environment variables validated successfully.","service":"nexoticket","timestamp":"2026-02-05 11:53:16"}
+{"level":"info","message":"Initializing NexoTicket in production mode...","service":"nexoticket","timestamp":"2026-02-05 11:53:18"}
+{"level":"info","message":"Healthcheck server successfully started on port 3002","service":"nexoticket","timestamp":"2026-02-05 11:53:18"}
+{"level":"info","message":"Executed query in 265ms","service":"nexoticket","timestamp":"2026-02-05 11:53:18"}
+{"level":"info","message":"Database connection established.","service":"nexoticket","timestamp":"2026-02-05 11:53:18"}
+{"level":"info","message":"Starting database migrations...","service":"nexoticket","timestamp":"2026-02-05 11:53:18"}
+{"level":"info","message":"Migrations completed successfully.","service":"nexoticket","timestamp":"2026-02-05 11:53:19"}
+{"level":"info","message":"Loaded event: guildCreate","service":"nexoticket","timestamp":"2026-02-05 11:53:19"}
+{"level":"info","message":"Loaded event: guildMemberAdd","service":"nexoticket","timestamp":"2026-02-05 11:53:19"}
+{"level":"info","message":"Loaded event: guildMemberRemove","service":"nexoticket","timestamp":"2026-02-05 11:53:19"}
+{"level":"info","message":"Loaded event: interactionCreate","service":"nexoticket","timestamp":"2026-02-05 11:53:19"}
+{"level":"info","message":"Loaded event: ready","service":"nexoticket","timestamp":"2026-02-05 11:53:19"}
+{"level":"info","message":"Loaded command metadata: category","service":"nexoticket","timestamp":"2026-02-05 11:53:19"}
+{"level":"info","message":"Loaded command metadata: config","service":"nexoticket","timestamp":"2026-02-05 11:53:19"}
+{"level":"info","message":"Loaded command metadata: panel","service":"nexoticket","timestamp":"2026-02-05 11:53:19"}
+{"level":"info","message":"Loaded command metadata: ping","service":"nexoticket","timestamp":"2026-02-05 11:53:19"}
+{"level":"info","message":"Loaded command metadata: stats","service":"nexoticket","timestamp":"2026-02-05 11:53:19"}
+{"level":"info","message":"Started refreshing 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 11:53:19"}
+{"level":"info","message":"Successfully reloaded 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 11:53:20"}
+{"level":"info","message":"Ready! Logged in as NexoTicket#0846","service":"nexoticket","timestamp":"2026-02-05 11:53:21"}
+{"level":"info","message":"Syncing configuration for 2 guilds...","service":"nexoticket","timestamp":"2026-02-05 11:53:21"}
+{"level":"info","message":"Guild configuration sync completed.","service":"nexoticket","timestamp":"2026-02-05 11:53:21"}
+{"level":"info","message":"File logging enabled. Error log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/error.log, Combined log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/combined.log","service":"nexoticket","timestamp":"2026-02-05 11:53:59"}
+{"level":"info","message":"Environment variables validated successfully.","service":"nexoticket","timestamp":"2026-02-05 11:53:59"}
+{"level":"info","message":"Initializing NexoTicket in production mode...","service":"nexoticket","timestamp":"2026-02-05 11:54:03"}
+{"level":"info","message":"Healthcheck server successfully started on port 3002","service":"nexoticket","timestamp":"2026-02-05 11:54:03"}
+{"level":"info","message":"Executed query in 246ms","service":"nexoticket","timestamp":"2026-02-05 11:54:03"}
+{"level":"info","message":"Database connection established.","service":"nexoticket","timestamp":"2026-02-05 11:54:03"}
+{"level":"info","message":"Starting database migrations...","service":"nexoticket","timestamp":"2026-02-05 11:54:03"}
+{"level":"info","message":"Migrations completed successfully.","service":"nexoticket","timestamp":"2026-02-05 11:54:05"}
+{"level":"info","message":"Loaded event: guildCreate","service":"nexoticket","timestamp":"2026-02-05 11:54:05"}
+{"level":"info","message":"Loaded event: guildMemberAdd","service":"nexoticket","timestamp":"2026-02-05 11:54:05"}
+{"level":"info","message":"Loaded event: guildMemberRemove","service":"nexoticket","timestamp":"2026-02-05 11:54:05"}
+{"level":"info","message":"Loaded event: interactionCreate","service":"nexoticket","timestamp":"2026-02-05 11:54:05"}
+{"level":"info","message":"Loaded event: ready","service":"nexoticket","timestamp":"2026-02-05 11:54:05"}
+{"level":"info","message":"Loaded command metadata: category","service":"nexoticket","timestamp":"2026-02-05 11:54:05"}
+{"level":"info","message":"Loaded command metadata: config","service":"nexoticket","timestamp":"2026-02-05 11:54:05"}
+{"level":"info","message":"Loaded command metadata: panel","service":"nexoticket","timestamp":"2026-02-05 11:54:05"}
+{"level":"info","message":"Loaded command metadata: ping","service":"nexoticket","timestamp":"2026-02-05 11:54:05"}
+{"level":"info","message":"Loaded command metadata: stats","service":"nexoticket","timestamp":"2026-02-05 11:54:05"}
+{"level":"info","message":"Started refreshing 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 11:54:05"}
+{"level":"info","message":"Successfully reloaded 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 11:54:05"}
+{"level":"info","message":"Ready! Logged in as NexoTicket#0846","service":"nexoticket","timestamp":"2026-02-05 11:54:06"}
+{"level":"info","message":"Syncing configuration for 2 guilds...","service":"nexoticket","timestamp":"2026-02-05 11:54:06"}
+{"level":"info","message":"Guild configuration sync completed.","service":"nexoticket","timestamp":"2026-02-05 11:54:06"}
+{"level":"info","message":"File logging enabled. Error log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/error.log, Combined log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/combined.log","service":"nexoticket","timestamp":"2026-02-05 11:54:37"}
+{"level":"info","message":"Environment variables validated successfully.","service":"nexoticket","timestamp":"2026-02-05 11:54:37"}
+{"level":"info","message":"Initializing NexoTicket in production mode...","service":"nexoticket","timestamp":"2026-02-05 11:54:40"}
+{"level":"info","message":"Healthcheck server successfully started on port 3002","service":"nexoticket","timestamp":"2026-02-05 11:54:40"}
+{"level":"info","message":"Executed query in 305ms","service":"nexoticket","timestamp":"2026-02-05 11:54:41"}
+{"level":"info","message":"Database connection established.","service":"nexoticket","timestamp":"2026-02-05 11:54:41"}
+{"level":"info","message":"Starting database migrations...","service":"nexoticket","timestamp":"2026-02-05 11:54:41"}
+{"level":"info","message":"Migrations completed successfully.","service":"nexoticket","timestamp":"2026-02-05 11:54:42"}
+{"level":"info","message":"Loaded event: guildCreate","service":"nexoticket","timestamp":"2026-02-05 11:54:42"}
+{"level":"info","message":"Loaded event: guildMemberAdd","service":"nexoticket","timestamp":"2026-02-05 11:54:42"}
+{"level":"info","message":"Loaded event: guildMemberRemove","service":"nexoticket","timestamp":"2026-02-05 11:54:42"}
+{"level":"info","message":"Loaded event: interactionCreate","service":"nexoticket","timestamp":"2026-02-05 11:54:42"}
+{"level":"info","message":"Loaded event: ready","service":"nexoticket","timestamp":"2026-02-05 11:54:42"}
+{"level":"info","message":"Loaded command metadata: category","service":"nexoticket","timestamp":"2026-02-05 11:54:42"}
+{"level":"info","message":"Loaded command metadata: config","service":"nexoticket","timestamp":"2026-02-05 11:54:42"}
+{"level":"info","message":"Loaded command metadata: panel","service":"nexoticket","timestamp":"2026-02-05 11:54:42"}
+{"level":"info","message":"Loaded command metadata: ping","service":"nexoticket","timestamp":"2026-02-05 11:54:42"}
+{"level":"info","message":"Loaded command metadata: stats","service":"nexoticket","timestamp":"2026-02-05 11:54:42"}
+{"level":"info","message":"Started refreshing 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 11:54:42"}
+{"level":"info","message":"Successfully reloaded 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 11:54:44"}
+{"level":"info","message":"Ready! Logged in as NexoTicket#0846","service":"nexoticket","timestamp":"2026-02-05 11:54:45"}
+{"level":"info","message":"Syncing configuration for 2 guilds...","service":"nexoticket","timestamp":"2026-02-05 11:54:45"}
+{"level":"info","message":"Guild configuration sync completed.","service":"nexoticket","timestamp":"2026-02-05 11:54:45"}
+{"level":"info","message":"File logging enabled. Error log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/error.log, Combined log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/combined.log","service":"nexoticket","timestamp":"2026-02-05 11:57:54"}
+{"level":"info","message":"Environment variables validated successfully.","service":"nexoticket","timestamp":"2026-02-05 11:57:54"}
+{"level":"info","message":"Initializing NexoTicket in production mode...","service":"nexoticket","timestamp":"2026-02-05 11:58:00"}
+{"level":"info","message":"Healthcheck server successfully started on port 3002","service":"nexoticket","timestamp":"2026-02-05 11:58:00"}
+{"level":"info","message":"Executed query in 663ms","service":"nexoticket","timestamp":"2026-02-05 11:58:00"}
+{"level":"info","message":"Database connection established.","service":"nexoticket","timestamp":"2026-02-05 11:58:00"}
+{"level":"info","message":"Starting database migrations...","service":"nexoticket","timestamp":"2026-02-05 11:58:00"}
+{"level":"info","message":"Migrations completed successfully.","service":"nexoticket","timestamp":"2026-02-05 11:58:02"}
+{"level":"info","message":"Loaded event: guildCreate","service":"nexoticket","timestamp":"2026-02-05 11:58:02"}
+{"level":"info","message":"Loaded event: guildMemberAdd","service":"nexoticket","timestamp":"2026-02-05 11:58:02"}
+{"level":"info","message":"Loaded event: guildMemberRemove","service":"nexoticket","timestamp":"2026-02-05 11:58:02"}
+{"level":"info","message":"Loaded event: interactionCreate","service":"nexoticket","timestamp":"2026-02-05 11:58:02"}
+{"level":"info","message":"Loaded event: ready","service":"nexoticket","timestamp":"2026-02-05 11:58:02"}
+{"level":"info","message":"Loaded command metadata: category","service":"nexoticket","timestamp":"2026-02-05 11:58:02"}
+{"level":"info","message":"Loaded command metadata: config","service":"nexoticket","timestamp":"2026-02-05 11:58:02"}
+{"level":"info","message":"Loaded command metadata: panel","service":"nexoticket","timestamp":"2026-02-05 11:58:02"}
+{"level":"info","message":"Loaded command metadata: ping","service":"nexoticket","timestamp":"2026-02-05 11:58:02"}
+{"level":"info","message":"Loaded command metadata: stats","service":"nexoticket","timestamp":"2026-02-05 11:58:02"}
+{"level":"info","message":"Started refreshing 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 11:58:02"}
+{"level":"info","message":"Successfully reloaded 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 11:58:03"}
+{"level":"info","message":"Ready! Logged in as NexoTicket#0846","service":"nexoticket","timestamp":"2026-02-05 11:58:04"}
+{"level":"info","message":"Syncing configuration for 2 guilds...","service":"nexoticket","timestamp":"2026-02-05 11:58:04"}
+{"level":"info","message":"Guild configuration sync completed.","service":"nexoticket","timestamp":"2026-02-05 11:58:04"}
+{"level":"info","message":"File logging enabled. Error log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/error.log, Combined log: /Users/italo/Documents/Projetos/BotsParaDiscord/NexoTicket/apps/bot/logs/combined.log","service":"nexoticket","timestamp":"2026-02-05 11:58:18"}
+{"level":"info","message":"Environment variables validated successfully.","service":"nexoticket","timestamp":"2026-02-05 11:58:18"}
+{"level":"info","message":"Initializing NexoTicket in production mode...","service":"nexoticket","timestamp":"2026-02-05 11:58:22"}
+{"level":"info","message":"Healthcheck server successfully started on port 3002","service":"nexoticket","timestamp":"2026-02-05 11:58:23"}
+{"level":"info","message":"Executed query in 977ms","service":"nexoticket","timestamp":"2026-02-05 11:58:23"}
+{"level":"info","message":"Database connection established.","service":"nexoticket","timestamp":"2026-02-05 11:58:23"}
+{"level":"info","message":"Starting database migrations...","service":"nexoticket","timestamp":"2026-02-05 11:58:23"}
+{"level":"info","message":"Migrations completed successfully.","service":"nexoticket","timestamp":"2026-02-05 11:58:25"}
+{"level":"info","message":"Loaded event: guildCreate","service":"nexoticket","timestamp":"2026-02-05 11:58:25"}
+{"level":"info","message":"Loaded event: guildMemberAdd","service":"nexoticket","timestamp":"2026-02-05 11:58:25"}
+{"level":"info","message":"Loaded event: guildMemberRemove","service":"nexoticket","timestamp":"2026-02-05 11:58:25"}
+{"level":"info","message":"Loaded event: interactionCreate","service":"nexoticket","timestamp":"2026-02-05 11:58:25"}
+{"level":"info","message":"Loaded event: ready","service":"nexoticket","timestamp":"2026-02-05 11:58:25"}
+{"level":"info","message":"Loaded command metadata: category","service":"nexoticket","timestamp":"2026-02-05 11:58:25"}
+{"level":"info","message":"Loaded command metadata: config","service":"nexoticket","timestamp":"2026-02-05 11:58:25"}
+{"level":"info","message":"Loaded command metadata: panel","service":"nexoticket","timestamp":"2026-02-05 11:58:25"}
+{"level":"info","message":"Loaded command metadata: ping","service":"nexoticket","timestamp":"2026-02-05 11:58:25"}
+{"level":"info","message":"Loaded command metadata: stats","service":"nexoticket","timestamp":"2026-02-05 11:58:25"}
+{"level":"info","message":"Started refreshing 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 11:58:25"}
+{"level":"info","message":"Successfully reloaded 5 application (/) commands.","service":"nexoticket","timestamp":"2026-02-05 11:58:26"}
+{"level":"info","message":"Ready! Logged in as NexoTicket#0846","service":"nexoticket","timestamp":"2026-02-05 11:58:27"}
+{"level":"info","message":"Syncing configuration for 2 guilds...","service":"nexoticket","timestamp":"2026-02-05 11:58:27"}
+{"level":"info","message":"Guild configuration sync completed.","service":"nexoticket","timestamp":"2026-02-05 11:58:27"}

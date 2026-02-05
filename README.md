@@ -3,102 +3,170 @@
 [![Railway Deploy](https://raw.githubusercontent.com/railwayapp/core/master/assets/badge-light.svg)](https://railway.app/new)
 ![Node Version](https://img.shields.io/badge/node-%3E%3D20.0.0-brightgreen)
 ![Discord.js](https://img.shields.io/badge/discord.js-v14-blue)
+![Tests](https://img.shields.io/badge/tests-21%20passing-success)
+![Coverage](https://img.shields.io/badge/coverage-67%25-yellow)
 ![License](https://img.shields.io/badge/license-MIT-orange)
 
-**NexoTicket** é uma solução enterprise-grade de tickets para Discord, projetada para alta performance, segurança robusta e experiência de usuário premium.
+**NexoTicket** é uma solução enterprise-grade de tickets para Discord, com bot e dashboard web integrados.
 
-## ✨ Funcionalidades Principais
+## ✨ Funcionalidades
 
-- 🎫 **Sistema de Painéis:** Crie embeds personalizados com botões para abertura de tickets.
-- ✋ **Gestão de Staff:** Comandos para assumir, transferir e gerenciar permissões em tempo real.
-- 📄 **Transcrições HTML:** Backups completos e estilizados enviados por DM e salvos em banco.
-- ⭐ **Satisfação do Cliente:** Sistema de avaliação (rating) 1-5 estrelas com feedback textual.
-- ⚙️ **Configuração Dinâmica:** Controle total via `/config` (logs, welcome messages, ratings).
-- 📊 **Dashboard de Analytics:** Estatísticas globais e individuais via `/stats`.
-- 🛡️ **Pronto para Produção:** Graceful shutdown, cache inteligente, monitoramento e índices de performance.
+### Bot Discord
+- 🎫 **Painéis de Tickets**: Embeds personalizados com botões para abertura
+- ✋ **Gestão de Staff**: Assumir, transferir e gerenciar permissões em tempo real
+- 📄 **Transcrições HTML**: Backups completos enviados por DM
+- ⭐ **Avaliações**: Sistema 1-5 estrelas com feedback textual
+- ⚙️ **Configuração Dinâmica**: Controle total via `/config`
+- 📊 **Analytics**: Estatísticas globais e individuais via `/stats`
 
-## 🚀 Como Começar
+### Dashboard Web (Next.js 16)
+- 🖥️ **Interface Premium**: Design moderno com Tailwind CSS
+- 🔐 **Autenticação Discord**: Login via OAuth2
+- 📋 **Gestão Visual**: Painéis, categorias e configurações em tempo real
+- 📱 **Responsivo**: Funciona em desktop e mobile
+
+## 🚀 Instalação
 
 ### Pré-requisitos
-- Node.js v20 ou superior.
-- Uma conta no [Neon.tech](https://neon.tech/) (PostgreSQL Serverless).
-- Um Bot no [Portal de Desenvolvedores do Discord](https://discord.com/developers/applications).
+- Node.js v20+
+- [Neon.tech](https://neon.tech/) (PostgreSQL Serverless)
+- [Bot Discord](https://discord.com/developers/applications)
 
-### Instalação Local
-1. Clone o repositório:
+### Configuração Local
+
 ```bash
+# Clone o repositório
 git clone https://github.com/seu-usuario/NexoTicket.git
 cd NexoTicket
-```
-2. Instale as dependências:
-```bash
-npm install
-```
-3. Configure o `.env` (use `.env.example` como base).
-4. Rode as migrações e o bot em modo dev:
-```bash
-npm run dev
-```
 
-### Deploy no Railway
-O NexoTicket vem pré-configurado para o **Railway**:
-1. Conecte seu repositório GitHub ao Railway.
-2. Adicione as variáveis de ambiente necessárias (`DISCORD_TOKEN`, `DATABASE_URL`, etc.).
-3. O Railway usará automaticamente o `railway.json` e o `npm start` (que roda as migrações e inicia o bot).
+# Instale dependências
+npm install
+cd apps/web && npm install && cd ../..
+
+# Configure as variáveis de ambiente
+cp .env.example .env
+cp apps/web/.env.example apps/web/.env
+# Edite os arquivos .env com suas credenciais
+
+# Execute as migrações
+npm run migrate
+
+# Inicie em modo de desenvolvimento
+npm run dev                    # Bot
+cd apps/web && npm run dev     # Dashboard (porta 3001)
+```
 
 ## ⚙️ Variáveis de Ambiente
 
-| Variável | Descrição | Obrigatório |
-|----------|-----------|-------------|
-| `DISCORD_TOKEN` | Token secreto do seu bot Discord. | Sim |
-| `CLIENT_ID` | ID da aplicação do bot. | Sim |
-| `GUILD_ID` | ID do servidor para registro de comandos (dev). | Sim |
-| `DATABASE_URL` | URL de conexão do NeonDB (PostgreSQL). | Sim |
-| `NODE_ENV` | `production` ou `development`. | Não |
-| `PORT` | Porta para o healthcheck HTTP. | Não |
+### Bot (`.env` na raiz)
+
+| Variável | Descrição |
+|----------|-----------|
+| `DISCORD_TOKEN` | Token secreto do bot |
+| `CLIENT_ID` | ID da aplicação |
+| `GUILD_ID` | ID do servidor (desenvolvimento) |
+| `DATABASE_URL` | URL de conexão NeonDB |
+| `NODE_ENV` | `production` ou `development` |
+
+### Dashboard (`apps/web/.env`)
+
+| Variável | Descrição |
+|----------|-----------|
+| `NEXTAUTH_URL` | URL base (ex: `http://localhost:3001`) |
+| `NEXTAUTH_SECRET` | Secret para JWT |
+| `DISCORD_CLIENT_ID` | ID da aplicação OAuth |
+| `DISCORD_CLIENT_SECRET` | Secret OAuth |
+| `DATABASE_URL` | URL de conexão NeonDB |
 
 ## 📊 Comandos Disponíveis
 
 ### Administração
-- `/config staff`: Gerencia cargos da equipe.
-- `/config logs`: Define o canal de auditoria.
-- `/config welcome`: Define a mensagem de boas-vindas dos tickets.
-- `/config rating`: Ativa/desativa avaliações dos usuários.
-- `/panel`: Cria, edita ou deleta painéis de atendimento.
+| Comando | Descrição |
+|---------|-----------|
+| `/config staff` | Gerencia cargos da equipe |
+| `/config logs` | Define canal de auditoria |
+| `/config rating` | Ativa/desativa avaliações |
+| `/panel` | Cria/edita/deleta painéis |
+| `/category` | Gerencia categorias de tickets |
 
 ### Utilidade
-- `/stats global`: Dashboard geral do servidor.
-- `/stats staff`: Performance de um membro específico.
-- `/stats user`: Histórico de um usuário.
-- `/ping`: Verifica a latência do bot e da API.
+| Comando | Descrição |
+|---------|-----------|
+| `/stats global` | Dashboard geral |
+| `/stats staff @user` | Performance de staff |
+| `/stats user @user` | Histórico de usuário |
+| `/ping` | Latência do bot |
 
 ## 🏗️ Estrutura do Projeto
 
-```text
-/src
-  /commands     - Comandos Slash organizados por categoria
-  /database     - Camada de persistência e migrations
-  /events       - Handlers de eventos do Discord
-  /utils        - Utilitários de lógica, logs, cache e métricas
-  index.js      - Ponto de entrada (Bootstrap & Resilience)
+```
+NexoTicket/
+├── apps/
+│   ├── bot/               # Bot Discord (Node.js)
+│   │   └── src/
+│   │       ├── commands/  # Slash commands
+│   │       ├── database/  # Queries e migrações
+│   │       ├── events/    # Event handlers
+│   │       ├── tests/     # Testes Jest
+│   │       └── utils/     # Utilitários
+│   └── web/               # Dashboard (Next.js 16)
+│       └── src/
+│           ├── app/       # App Router
+│           ├── components/
+│           └── lib/       # Auth e DB
+├── packages/              # Código compartilhado
+└── docs/                  # Documentação
 ```
 
-## 📈 Performance Benchmarks (Estimativas)
+## 🧪 Testes
 
-- **Command Discovery:** Instantâneo (Lazy Loading metadados).
-- **Ticket Creation:** < 2s (incluindo permissões e DB persistence).
-- **Uso de Memória:** ~80-120MB em idle.
-- **Database Latency:** Otimizada via índices compostos.
+```bash
+# Executar todos os testes
+npm run test
 
-## 🛡️ Segurança e Resiliência
+# Cobertura atual
+# Test Suites: 6 passed
+# Tests:       21 passed
+# Coverage:    67%
+```
 
-- **Graceful Shutdown:** O bot finaliza conexões e destrói o cliente Discord de forma limpa ao receber SIGTERM.
-- **Cache Inteligente:** TTL de 5 minutos para permissões e configurações, reduzindo custos de DB.
-- **Monitoramento:** Logs estruturados com Winston e relatórios periódicos de métricas.
+## 🚀 Deploy
+
+### Railway (Recomendado)
+
+1. Conecte seu repositório ao Railway
+2. Configure as variáveis de ambiente
+3. O `railway.json` já está configurado
+
+### Manual
+
+```bash
+# Build do dashboard
+cd apps/web && npm run build
+
+# Produção
+npm run start          # Bot
+npm run start          # Dashboard (porta 3001)
+```
+
+## 📈 Performance
+
+- **Command Discovery**: Instantâneo (Lazy Loading)
+- **Ticket Creation**: < 2s
+- **Uso de Memória**: ~80-120MB em idle
+- **Database Latency**: Otimizada via índices
+
+## 🛡️ Segurança
+
+- **Graceful Shutdown**: Finalização limpa ao receber SIGTERM
+- **Cache Inteligente**: TTL de 5 minutos para configurações
+- **Logs Estruturados**: Winston com rotação
+- **Rate Limiting**: Proteção contra spam
 
 ## 📄 Licença
 
-Distribuído sob a licença **MIT**. Veja [LICENSE](./LICENSE) para mais informações.
+MIT - Veja [LICENSE](./LICENSE)
 
 ---
+
 Desenvolvido por **Nexo** 🎫
