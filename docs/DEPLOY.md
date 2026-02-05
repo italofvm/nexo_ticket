@@ -16,6 +16,9 @@ O projeto inclui um arquivo `render.yaml` na raiz, que automatiza a criação do
 3.  O Render detectará automaticamente o arquivo `render.yaml` e exibirá o serviço `nexo-bot`.
 4.  Clique em **Apply** para criar o serviço.
 
+
+> **IMPORTANTE**: Certifique-se de que a configuração **Root Directory** no Render esteja vazia (padrão) ou definida como `.`. O arquivo `render.yaml` já configura isso automaticamente como `.`. Se você definir como `apps/bot`, o deploy falhará com erro `MODULE_NOT_FOUND`.
+
 ## Variáveis de Ambiente
 
 Por questões de segurança, tokens e segredos não são commitados no `render.yaml`. Você deve configurá-los manualmente no dashboard do Render após a criação do serviço, ou durante a configuração inicial se solicitado.
