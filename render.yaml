@@ -1,0 +1,15 @@
+services:
+  - type: worker
+    name: nexo-bot
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 20.x
+      - key: DISCORD_TOKEN
+        sync: false
+      - key: DATABASE_URL
+        sync: false

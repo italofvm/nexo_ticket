@@ -459,3 +459,6 @@
 {"level":"info","message":"Ready! Logged in as NexoTicket#0846","service":"nexoticket","timestamp":"2026-02-05 11:58:27"}
 {"level":"info","message":"Syncing configuration for 2 guilds...","service":"nexoticket","timestamp":"2026-02-05 11:58:27"}
 {"level":"info","message":"Guild configuration sync completed.","service":"nexoticket","timestamp":"2026-02-05 11:58:27"}
+{"level":"info","message":"--- Periodic Metrics Report ---","service":"nexoticket","timestamp":"2026-02-05 12:58:26"}
+{"level":"info","message":"Uptime: 3601s | Commands: 0 | Tickets Open/Close: 0/0 | Errors: 0","service":"nexoticket","timestamp":"2026-02-05 12:58:26"}
+{"level":"info","message":"Received SIGINT. Shutting down gracefully...","service":"nexoticket","timestamp":"2026-02-05 13:23:32"}
